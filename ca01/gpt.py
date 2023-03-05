@@ -44,6 +44,39 @@ class GPT():
 
         response = completion.choices[0].text
         return response
+    
+    #This method can be used to summarize a given text by adding the prompt 
+    #"Summarize the following text in one or two sentences: \n\n" and returning the GPT response.
+    def get_summarization(self, text):
+        prompt = "Summarize the following text in one or two sentences:"
+        full_prompt = f"{prompt}\n\n{text}"
+        response = self.get_response(full_prompt)
+        return response
+
+    #This method can be used to translate a given text to a target language by adding the prompt 
+    # "Translate the following text to {target_language}: \n\n" and returning the GPT response.
+    def get_translation(self, text, target_language):
+        prompt = f"Translate the following text to {target_language}:"
+        full_prompt = f"{prompt}\n\n{text}"
+        response = self.get_response(full_prompt)
+        return response
+
+
+    #This method can be used to paraphrase a given text by adding the prompt
+    # "Paraphrase the following text: \n\n" and returning the GPT response. 
+    def get_paraphrase(self, text):
+        prompt = "Paraphrase the following text:"
+        full_prompt = f"{prompt}\n\n{text}"
+        response = self.get_response(full_prompt)
+        return response
+
+    #This method can be used to generate a poem based on a given prompt by adding the prompt
+    #"Write a poem about: \n\n" and returning the GPT response.
+    def get_poem(self, prompt):
+        prompt = "Write a poem about:\n\n" + prompt
+        response = self.get_response(prompt)
+        return response
+
 
 if __name__=='__main__':
     '''

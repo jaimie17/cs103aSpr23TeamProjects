@@ -80,6 +80,12 @@ class GPT():
         full_prompt = f"{prompt}\n\n{text}"
         response = self.get_response(full_prompt)
         return response
+    
+    def get_synonyms(self, word):
+        prompt = f"Generate synonyms for the word {word}:"
+        response = self.get_response(prompt)
+        return response
+
 
 
 if __name__=='__main__':

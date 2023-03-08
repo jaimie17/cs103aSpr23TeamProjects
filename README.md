@@ -14,4 +14,4 @@ The methods used in the GPT class generates text in various formats (summaries, 
 <br>2. Jaimie Louie
 <br>3. Samiyanur Islam
 <br>4. Cindy Chi
-<br/>5. Allison Chanim
+<br/>5. Allison Chanin

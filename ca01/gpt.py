@@ -49,14 +49,14 @@ class GPT():
     #"Summarize the following text in one or two sentences: \n\n" and returning the GPT response.
     def get_summarization(self, text):
         prompt = "Summarize the following text in one or two sentences:"
-        response = self.get_response(prompt)
+        response = self.getResponse(prompt)
         return response
 
     #This method can be used to translate a given text to a target language by adding the prompt 
     # "Translate the following text to {target_language}: \n\n" and returning the GPT response.
     def get_translation(self, text, target_language):
         prompt = "Translate the following text to {target_language}:"
-        response = self.get_response(prompt)
+        response = self.getResponse(prompt)
         return response
 
 
@@ -64,28 +64,28 @@ class GPT():
     # "Paraphrase the following text:" and returning the GPT response. 
     def get_paraphrase(self, text):
         prompt = "Paraphrase the following text:"
-        response = self.get_response(prompt)
+        response = self.getResponse(prompt)
         return response
 
     #This method can be used to generate a poem based on a given prompt by adding the prompt
     #"Write a poem about: \n\n" and returning the GPT response.
     def get_poem(self, prompt):
         prompt = "Write a poem about:\n\n" + prompt
-        response = self.get_response(prompt)
+        response = self.getResponse(prompt)
         return response
 
     def edit_grammar(self, text):
         '''Generate a GPT response to correct the grammar of a given text.'''
         prompt = "Correct the grammar of the following text:"
         full_prompt = f"{prompt}\n\n{text}"
-        response = self.get_response(full_prompt)
+        response = self.getResponse(full_prompt)
         return response
     
     ##This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt
     ##"Generate synonyms for the word {word}".
     def get_synonyms(self, word):
         prompt = f"Generate synonyms for the word {word}:"
-        response = self.get_response(prompt)
+        response = self.getResponse(prompt)
         return response
 
 

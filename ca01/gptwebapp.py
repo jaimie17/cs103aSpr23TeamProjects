@@ -29,14 +29,23 @@ gptAPI = GPT(os.environ.get('APIKEY'))
 app.secret_key = b'_5#y2L"F4Q789789uioujkkljkl...8z\n\xec]/'
 
 @app.route('/')
-def index():
+def home():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
         <h1>GPT Demo</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
+        <br>
+        <a href="{url_for('team_pages')}">Index</a>
     '''
-
+@app.route('/index')
+def team_pages():
+    ''' display a link to index with team page links'''
+    print('processing / route')
+    return f'''
+        <h1>Team Pages</h1>
+        <a href="{url_for('grammar')}">Grammar Editor</a>
+    '''
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
@@ -60,6 +69,33 @@ def gptdemo():
         return '''
         <h1>GPT Demo App</h1>
         Enter your query below
+        <form method="post">
+            <textarea name="prompt"></textarea>
+            <p><input type=submit value="get response">
+        </form>
+        '''
+@app.route('/index/grammar', methods=['GET', 'POST'])
+def grammar():
+    ''' handle a get request by sending a form 
+        and a post request by returning the GPT response
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.edit_grammar(prompt)
+        return f'''
+        <h1>GPT Grammar Editor</h1>
+        Your input was:
+        <pre style="border:thin solid black">{prompt}</pre>
+        <hr>
+        Your edited text is:
+        <div style="border:thin solid black">{answer}</div>
+        <br>
+        <a href={url_for('grammar')}> edit more text</a>
+        '''
+    else:
+        return '''
+        <h1>GPT Grammar Editor</h1>
+        Enter your text below:
         <form method="post">
             <textarea name="prompt"></textarea>
             <p><input type=submit value="get response">

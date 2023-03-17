@@ -77,7 +77,7 @@ def gptdemo():
 @app.route('/index/grammar', methods=['GET', 'POST'])
 def grammar():
     ''' handle a get request by sending a form 
-        and a post request by returning the GPT response
+        and a post request by returning the GPT edited text
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']

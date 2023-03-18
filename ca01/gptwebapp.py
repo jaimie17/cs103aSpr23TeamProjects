@@ -53,17 +53,18 @@ def team_pages():
         <h1>Team Pages</h1>
         # Jaimie
         <a href="{url_for('grammar')}">Grammar Editor</a> 
-
+        <br>
         #Samiya
         <a href="{url_for('summarization')}"> Summarize Editor</a>
+        <br>
         <a href="{url_for('synonym')}"> Synonym Editor</a>  
-
+        <br>
         # Gianna
         <a href="{url_for('translation')}"> Translation Editor</a>
-
+        <br>
         # Cindy
         <a href="{url_for('paraphrase')}"> Paraphase Editor</a> 
-
+        <br>
         #Allison
         <a href="{url_for('poem')}"> Poem Editor</a>  
     '''

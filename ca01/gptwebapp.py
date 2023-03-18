@@ -239,6 +239,34 @@ def paraphrase():
             <p > <input type = submit value = "get response" >
         </form >
         '''
+
+@app.route('/index/poem', methods=['GET', 'POST'])
+def poem():
+    ''' handle a get request by sending a form
+        and a post request by returning the GPT edited text
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.get_poem(prompt)
+        return f'''
+    <h1 > GPT Poem Maker < /h1 >
+        Your input was:
+        <pre style = "border:thin solid black" > {prompt} < /pre >
+        <hr >
+        Your edited text is :
+        <div style = "border:thin solid black" > {answer} < /div >
+        <br >
+        <a href = {url_for('poem')} > make another poem < /a >
+        '''
+    else:
+        return '''
+        <h1 > GPT Poem Maker < /h1 >
+        Enter your text below:
+        <form method = "post" >
+            <textarea name = "prompt" > </textarea >
+            <p > <input type = submit value = "get response" >
+        </form >
+        '''
     
     
     

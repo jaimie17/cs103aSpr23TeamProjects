@@ -197,7 +197,7 @@ def translation():
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.edit_grammar(prompt)
+        answer = gptAPI.get_translation(prompt)
         return f'''
     <h1 > GPT Translator < /h1 >
         Your input was:

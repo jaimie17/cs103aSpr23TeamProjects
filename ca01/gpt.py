@@ -82,8 +82,8 @@ class GPT():
         return response
     
     ##This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt
-    ##"Generate synonyms for the word {word}".
     def get_synonyms(self, word):
+        '''Generate synonyms for the word {word}.'''
         prompt = f"Generate synonyms for the word {word}:"
         response = self.getResponse(prompt)
         return response

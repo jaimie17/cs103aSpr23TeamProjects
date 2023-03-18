@@ -1,5 +1,6 @@
 '''
-Demo code for interacting with GPT-3 in Python.
+Code for interacting with GPT-3 in Python. 
+We created a mock Grammarly using GPT.
 
 To run this you need to 
 * first visit openai.com and get an APIkey, 

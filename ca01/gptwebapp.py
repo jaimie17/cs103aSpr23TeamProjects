@@ -86,10 +86,10 @@ def team():
     return f'''
         <h1>Gianna Everette</h1>
             <p> Gianna is a sophomore majoring in Computer Science and minorig in physics. She was responsible for the Translation page.</p>
-        <h1>Samiyanaur Islam</h1>
+        <h1>Samiyanur Islam</h1>
             <p> Samiya is a sophomore majoring in Computer Science and Business. She was responsible for the Summarize and Synonym pages.</p>
-        <h1>Jaime Louie</h1>
-            <p> Jaime is a sophomore majoring in Computer Science. She was responsible for the Grammar page.</p>
+        <h1>Jaimie Louie</h1>
+            <p> Jaimie is a sophomore majoring in Computer Science. She was responsible for the Grammar page.</p>
         <h1>Cindy Chi</h1>
             <p> Cindy is a sophomore majoring in Business and minorig in HSSP and Computer Science. She was responsible for the Paraphrase page.</p>
         <h1>Allison Chanin</h1>

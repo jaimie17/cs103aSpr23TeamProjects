@@ -239,7 +239,7 @@ def summarization():
         </form >
         '''
 
-    @app.route('/index/paraphrase', methods=['GET', 'POST'])
+@app.route('/index/paraphrase', methods=['GET', 'POST'])
 def paraphrase():
     ''' handle a get request by sending a form
         and a post request by returning the GPT edited text

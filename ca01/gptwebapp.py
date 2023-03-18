@@ -37,6 +37,7 @@ def home():
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
         <br>
         <a href="{url_for('team_pages')}">Index</a>
+        <a href="{url_for('about')}">Index</a>
     '''
 @app.route('/index')
 def team_pages():
@@ -52,6 +53,7 @@ def about_page():
     print('processing / route')
     return f'''
         <h1>About Page</h>
+        
     
 
 @app.route('/gptdemo', methods=['GET', 'POST'])

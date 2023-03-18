@@ -48,7 +48,7 @@ class GPT():
     
     def get_summarization(self, text):
         '''Summarize a given text'''
-        prompt = "Summarize the following text in one or two sentences:\n\n{text}"
+        prompt = "Summarize the following text in one or two sentences" + text
         response = self.getResponse(prompt)
         return response
 
@@ -60,7 +60,7 @@ class GPT():
  
     def get_paraphrase(self, text):
         '''Paraphrase a given text'''
-        prompt = "Paraphrase the following text:\n\n{text}"
+        prompt = "Paraphrase the following text:" + text
         response = self.getResponse(prompt)
         return response
 

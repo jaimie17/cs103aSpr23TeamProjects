@@ -54,10 +54,10 @@ def team_pages():
         # Jaimie
         <a href="{url_for('grammar')}">Grammar Editor</a> 
         <br>
-        #Samiya
+        # Samiya
         <a href="{url_for('summarization')}"> Summarize Editor</a>
         <br>
-        #Samiya
+        # Samiya
         <a href="{url_for('synonym')}"> Synonym Editor</a>  
         <br>
         # Gianna

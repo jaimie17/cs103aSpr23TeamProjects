@@ -46,6 +46,10 @@ def team_pages():
         <h1>Team Pages</h1>
         <a href="{url_for('grammar')}">Grammar Editor</a>
     '''
+@app.route('/about')
+def about_page():
+    '''display a link to the about page'''
+    
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():

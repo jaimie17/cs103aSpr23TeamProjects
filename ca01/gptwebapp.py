@@ -66,7 +66,7 @@ def team_pages():
         # Cindy
         <a href="{url_for('paraphrase')}"> Paraphase Editor</a> 
         <br>
-        #Allison
+        # Allison
         <a href="{url_for('poem')}"> Poem Editor</a>  
     '''
 

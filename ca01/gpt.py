@@ -55,7 +55,7 @@ class GPT():
     #This method can be used to translate a given text to a target language by adding the prompt 
     # "Translate the following text to {target_language}: \n\n" and returning the GPT response.
     def get_translation(self, text, target_language):
-        prompt = "Translate the following text to {target_language}:"
+        prompt = f"Translate the following text to {target_language}\n\n{text}:"
         response = self.getResponse(prompt)
         return response
 

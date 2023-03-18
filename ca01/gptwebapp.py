@@ -149,10 +149,10 @@ def grammar():
     <h1 > GPT Grammar Editor </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
-        <hr >
+        <hr>
         Your edited text is :
         <div style = "border:thin solid black" > {answer} </div>
-        <br >
+        <br>
         <a href = {url_for('grammar')} > edit more text </a>
         '''
     else:
@@ -161,7 +161,7 @@ def grammar():
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
-            <p > <input type = submit value = "get response" >
+            <p> <input type = submit value = "get response" >
         </form >
         '''
 @app.route('/index/summarization', methods=['GET', 'POST'])
@@ -173,23 +173,23 @@ def summarization():
         prompt = request.form['prompt']
         answer = gptAPI.get_summarization(prompt)
         return f'''
-    <h1 > GPT Summarizer </h1>
+    <h1> GPT Summarizer </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr >
         Your summarized text is:
         <div style = "border:thin solid black" > {answer} </div>
-        <br >
+        <br>
         <a href = {url_for('summarization')} > summarize more text </a>
         '''
     else:
         return '''
-        <h1 > GPT Summarizer < /h1 >
+        <h1> GPT Summarizer </h1>
         Enter your text below:
         <form method = "post" >
-            <textarea name = "prompt" > </textarea >
-            <p > <input type = submit value = "get response" >
-        </form >
+            <textarea name = "prompt" > </textarea>
+            <p> <input type = submit value = "get response" >
+        </form>
         '''
 @app.route('/index/synonym', methods=['GET', 'POST'])
 def synonym():
@@ -201,23 +201,23 @@ def synonym():
         answer = gptAPI.get_synonyms(prompt)
         return f'''
     
-        <h1 > GPT Synonym Generator </h1>
+        <h1> GPT Synonym Generator </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
-        <hr >
+        <hr>
         Your synonyms are:
         <div style = "border:thin solid black" > {answer} </div>
-        <br >
+        <br>
         <a href = {url_for('synonym')} > get more synonyms </a>
         '''
     else:
         return '''
-        <h1 > GPT Synonym Generator </h1>
+        <h1> GPT Synonym Generator </h1>
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
-            <p > <input type = submit value = "get response" >
-        </form >
+            <p> <input type = submit value = "get response" >
+        </form>
         '''
 @app.route('/index/translation', methods=['GET', 'POST'])
 def translation():
@@ -228,23 +228,23 @@ def translation():
         prompt = request.form['prompt']
         answer = gptAPI.get_translation(prompt)
         return f'''
-    <h1 > GPT Spanish Translator </h1>
+    <h1> GPT Spanish Translator </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
-        <hr >
+        <hr>
         Your translation is :
         <div style = "border:thin solid black" > {answer} </div>
-        <br >
+        <br>
         <a href = {url_for('translation')} > translate more text </a>
         '''
     else:
         return '''
-        <h1 > GPT Spanish Translator </h1 >
+        <h1> GPT Spanish Translator </h1>
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
-            <p > <input type = submit value = "get response" >
-        </form >
+            <p> <input type = submit value = "get response" >
+        </form>
         '''
 
 @app.route('/index/paraphrase', methods=['GET', 'POST'])
@@ -256,23 +256,23 @@ def paraphrase():
         prompt = request.form['prompt']
         answer = gptAPI.get_paraphrase(prompt)
         return f'''
-    <h1 > GPT Paraphrase Editor </h1>
+    <h1> GPT Paraphrase Editor </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
-        <hr >
+        <hr>
         Your edited text is :
         <div style = "border:thin solid black" > {answer} </div>
-        <br >
-        <a href = {url_for('paraphrase')} > edit more text < /a>
+        <br>
+        <a href = {url_for('paraphrase')} > paraphrase more text </a>
         '''
     else:
         return '''
         <h1> GPT Paraphrase Editor </h1>
         Enter your text below:
         <form method = "post" >
-            <textarea name = "prompt" > </textarea >
-            <p > <input type = submit value = "get response" >
-        </form >
+            <textarea name = "prompt" > </textarea>
+            <p> <input type = submit value = "get response" >
+        </form>
         '''
 
 @app.route('/index/poem', methods=['GET', 'POST'])
@@ -287,7 +287,7 @@ def poem():
     <h1> GPT Poem Maker </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
-        <hr >
+        <hr>
         Your edited text is :
         <div style = "border:thin solid black" > {answer} </div>
         <br>
@@ -295,12 +295,12 @@ def poem():
         '''
     else:
         return '''
-        <h1 > GPT Poem Maker </h1>
+        <h1> GPT Poem Maker </h1>
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea>
-            <p > <input type = submit value = "get response">
-        </form >
+            <p> <input type = submit value = "get response">
+        </form>
         '''
     
     

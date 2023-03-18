@@ -145,7 +145,7 @@ def summarization():
         Your edited text is:
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('grammar')} > edit more text < /a >
+        <a href = {url_for('summarization')} > edit more text < /a >
         '''
     else:
         return '''
@@ -173,7 +173,7 @@ def synonym():
         Your edited text is:
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('grammar')} > edit more text < /a >
+        <a href = {url_for('synonym')} > edit more text < /a >
         '''
     else:
         return '''
@@ -184,7 +184,33 @@ def synonym():
             <p > <input type = submit value = "get response" >
         </form >
         '''
-
+@app.route('/index/translation', methods=['GET', 'POST'])
+def translation():
+    ''' handle a get request by sending a form
+        and a post request by returning the GPT edited text
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.edit_grammar(prompt)
+        return f'''
+    <h1 > GPT Translation Editor < /h1 >
+        Your input was:
+        <pre style = "border:thin solid black" > {prompt} < /pre >
+        <hr >
+        Your edited text is :
+        <div style = "border:thin solid black" > {answer} < /div >
+        <br >
+        <a href = {url_for('translation')} > edit more text < /a >
+        '''
+    else:
+        return '''
+        <h1 > GPT Translation Editor < /h1 >
+        Enter your text below:
+        <form method = "post" >
+            <textarea name = "prompt" > </textarea >
+            <p > <input type = submit value = "get response" >
+        </form >
+        '''
 
 
 if __name__=='__main__':

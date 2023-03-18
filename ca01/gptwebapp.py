@@ -221,18 +221,18 @@ def paraphrase():
         prompt = request.form['prompt']
         answer = gptAPI.get_paraphrase(prompt)
         return f'''
-    <h1 > GPT Paraphraser < /h1 >
+    <h1 > GPT Paraphrase Editor < /h1 >
         Your input was:
         <pre style = "border:thin solid black" > {prompt} < /pre >
         <hr >
         Your edited text is :
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('paraphrase')} > paraphrase more text < /a >
+        <a href = {url_for('paraphrase')} > edit more text < /a >
         '''
     else:
         return '''
-        <h1 > GPT Paraphraser < /h1 >
+        <h1 > GPT Paraphrase Editor < /h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >

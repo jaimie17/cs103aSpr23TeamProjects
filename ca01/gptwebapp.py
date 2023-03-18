@@ -34,7 +34,8 @@ def home():
     ''' display a link to the general query page '''
     print('processing / route')
     return f'''
-        <h1>GPT Demo</h1>
+        <body bgcolor="#FFC0CB">
+        <h1>GPT Grammarly</h1>
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
         <br>
         <a href="{url_for('team_pages')}">Index</a>
@@ -50,6 +51,7 @@ def team_pages():
     ''' display a link to index with team page links'''
     print('processing / route')
     return f'''
+        <body bgcolor="#FFC0CB">
         <h1>Team Pages</h1>
         # Jaimie
         <a href="{url_for('grammar')}">Grammar Editor</a> 
@@ -76,6 +78,7 @@ def about_page():
     '''display a link to the about page'''
     print('processing / route')
     return f'''
+        <body bgcolor="#FFC0CB">
         <h1>About Page</h>
         <h1>Method 1: Grammar </h1>
             <p> This method edits the grammar of the prompted text. </p>
@@ -96,6 +99,7 @@ def team():
     '''display a link to the about page'''
     print('processing / route')
     return f'''
+        <body bgcolor="#FFC0CB">
         <h1>Gianna Everette</h1>
             <p> Gianna is a sophomore majoring in Computer Science and minoring in physics. She was responsible for the Translation page.</p>
         <h1>Samiyanur Islam</h1>
@@ -120,8 +124,7 @@ def gptdemo():
         return f'''
 
         <h1> GPT Demo </h1>
-        <pre style = "bgcolor:yellow" > {prompt} </pre>
-        <hr >
+        <body bgcolor="#FFC0CB">
         Here is the answer in text mode:
         <div style = "border:thin solid black" > {answer} </div>
         Here is the answer in "pre" mode:
@@ -130,6 +133,7 @@ def gptdemo():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Demo App </h1>
         Enter your query below
         <form method = "post" >
@@ -146,7 +150,8 @@ def grammar():
         prompt = request.form['prompt']
         answer = gptAPI.edit_grammar(prompt)
         return f'''
-    <h1 > GPT Grammar Editor </h1>
+    <h1> GPT Grammar Editor </h1>
+        <body bgcolor="#FFC0CB">
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr>
@@ -157,6 +162,7 @@ def grammar():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Grammar Editor </h1>
         Enter your text below:
         <form method = "post" >
@@ -174,6 +180,7 @@ def summarization():
         answer = gptAPI.get_summarization(prompt)
         return f'''
     <h1> GPT Summarizer </h1>
+        <body bgcolor="#FFC0CB">
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr >
@@ -184,6 +191,7 @@ def summarization():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Summarizer </h1>
         Enter your text below:
         <form method = "post" >
@@ -200,7 +208,7 @@ def synonym():
         prompt = request.form['prompt']
         answer = gptAPI.get_synonyms(prompt)
         return f'''
-    
+        <body bgcolor="#FFC0CB">
         <h1> GPT Synonym Generator </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
@@ -212,6 +220,7 @@ def synonym():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Synonym Generator </h1>
         Enter your text below:
         <form method = "post" >
@@ -228,6 +237,7 @@ def translation():
         prompt = request.form['prompt']
         answer = gptAPI.get_translation(prompt)
         return f'''
+        <body bgcolor="#FFC0CB">
     <h1> GPT Spanish Translator </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
@@ -239,6 +249,7 @@ def translation():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Spanish Translator </h1>
         Enter your text below:
         <form method = "post" >
@@ -257,6 +268,7 @@ def paraphrase():
         answer = gptAPI.get_paraphrase(prompt)
         return f'''
     <h1> GPT Paraphrase Editor </h1>
+    <body bgcolor="#FFC0CB">
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr>
@@ -267,6 +279,7 @@ def paraphrase():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Paraphrase Editor </h1>
         Enter your text below:
         <form method = "post" >
@@ -285,6 +298,7 @@ def poem():
         answer = gptAPI.get_poem(prompt)
         return f'''
     <h1> GPT Poem Maker </h1>
+    <body bgcolor="#FFC0CB">
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr>
@@ -295,6 +309,7 @@ def poem():
         '''
     else:
         return '''
+        <body bgcolor="#FFC0CB">
         <h1> GPT Poem Maker </h1>
         Enter your text below:
         <form method = "post" >

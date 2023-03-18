@@ -47,14 +47,21 @@ def team_pages():
     print('processing / route')
     return f'''
         <h1>Team Pages</h1>
-        <a href="{url_for('grammar')}">Grammar Editor</a> #Jaimie's page
-        #Samiya's page
+        # Jaimie
+        <a href="{url_for('grammar')}">Grammar Editor</a> 
+
+        #Samiya
         <a href="{url_for('summarization')}"> Summarize Editor</a>
-        <a href="{url_for('synonym')}"> Synonym Editor</a>  #Samiya's page
-        #Gianna's page
+        <a href="{url_for('synonym')}"> Synonym Editor</a>  
+
+        # Gianna
         <a href="{url_for('translation')}"> Translation Editor</a>
-        <a href="{url_for('paraphrase')}"> Paraphase Editor</a>  #Cindy's page
-        <a href="{url_for('poem')}"> Poem Editor</a>  #Allison's page
+
+        # Cindy
+        <a href="{url_for('paraphrase')}"> Paraphase Editor</a> 
+
+        #Allison
+        <a href="{url_for('poem')}"> Poem Editor</a>  
     '''
 
 
@@ -64,17 +71,19 @@ def about_page():
     print('processing / route')
     return f'''
         <h1>About Page</h>
+    '''
 
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():
-    ''' handle a get request by sending a form
+    ''' handle a get request by sending a form 
         and a post request by returning the GPT response
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
         answer = gptAPI.getResponse(prompt)
         return f'''
+
         <h1 > GPT Demo < /h1 >
         <pre style = "bgcolor:yellow" > {prompt} < /pre >
         <hr >
@@ -156,7 +165,8 @@ def synonym():
         prompt = request.form['prompt']
         answer = gptAPI.edit_grammar(prompt)
         return f'''
-    <h1 > GPT Synonym Editor < /h1 >
+    
+        <h1 > GPT Synonym Editor < /h1 >
         Your input was:
         <pre style = "border:thin solid black" > {prompt} < /pre >
         <hr >

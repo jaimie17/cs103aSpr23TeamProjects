@@ -84,7 +84,7 @@ def gptdemo():
         answer = gptAPI.getResponse(prompt)
         return f'''
 
-        <h1 > GPT Demo < /h1 >
+        <h1> GPT Demo </h1>
         <pre style = "bgcolor:yellow" > {prompt} < /pre >
         <hr >
         Here is the answer in text mode:
@@ -122,7 +122,7 @@ def grammar():
         '''
     else:
         return '''
-        <h1 > GPT Grammar Editor < /h1 >
+        <h1> GPT Grammar Editor </h1>
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >

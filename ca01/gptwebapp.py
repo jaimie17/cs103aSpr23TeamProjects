@@ -38,7 +38,9 @@ def home():
         <a href="{url_for('gptdemo')}">Ask questions to GPT</a>
         <br>
         <a href="{url_for('team_pages')}">Index</a>
+        <br>
         <a href="{url_for('about_page')}">About</a>
+        <br>
         <a href="{url_for('team')}">Team</a>
     '''
 

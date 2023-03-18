@@ -79,7 +79,7 @@ def about_page():
         <h1>Method 1: Grammar: This method edits the grammar of the prompted text. </h1>
         <h1>Method 2: Summarization: This method can be used to summarize a given text by adding the prompt. </h1>
         <h1>Method 3: Synonym: This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt. </h1>
-        <h1>Method 4: Translation: This method can be used to translate a given text to a target language by adding the prompt. </h1>
+        <h1>Method 4: Spanish Translation: This method can be used to translate a given text to a target language by adding the prompt. </h1>
         <h1>Method 5: Paraphrase: This method can be used to paraphrase a given text by adding the prompt. </h1>
         <h1>Method 6: Poem: This method can be used to generate a poem based on a given prompt by adding the prompt. </h1>
     '''
@@ -221,7 +221,7 @@ def translation():
         prompt = request.form['prompt']
         answer = gptAPI.get_translation(prompt)
         return f'''
-    <h1 > GPT Translator </h1>
+    <h1 > GPT Spanish Translator </h1>
         Your input was:
         <pre style = "border:thin solid black" > {prompt} </pre>
         <hr >
@@ -232,7 +232,7 @@ def translation():
         '''
     else:
         return '''
-        <h1 > GPT Translator < /h1 >
+        <h1 > GPT Spanish Translator < /h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >

@@ -49,6 +49,9 @@ def team_pages():
 @app.route('/about')
 def about_page():
     '''display a link to the about page'''
+    print('processing / route')
+    return f'''
+        <h1>About Page</h>
     
 
 @app.route('/gptdemo', methods=['GET', 'POST'])

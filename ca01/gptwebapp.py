@@ -212,6 +212,37 @@ def translation():
         </form >
         '''
 
+@app.route('/index/paraphrase', methods=['GET', 'POST'])
+def paraphrase():
+    ''' handle a get request by sending a form
+        and a post request by returning the GPT edited text
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.get_paraphrase(prompt)
+        return f'''
+    <h1 > GPT Paraphrase Editor < /h1 >
+        Your input was:
+        <pre style = "border:thin solid black" > {prompt} < /pre >
+        <hr >
+        Your edited text is :
+        <div style = "border:thin solid black" > {answer} < /div >
+        <br >
+        <a href = {url_for('paraphrase')} > edit more text < /a >
+        '''
+    else:
+        return '''
+        <h1 > GPT Paraphrase Editor < /h1 >
+        Enter your text below:
+        <form method = "post" >
+            <textarea name = "prompt" > </textarea >
+            <p > <input type = submit value = "get response" >
+        </form >
+        '''
+    
+    
+    
+   
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(

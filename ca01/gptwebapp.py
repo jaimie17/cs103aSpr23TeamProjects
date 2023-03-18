@@ -57,6 +57,7 @@ def team_pages():
         #Samiya
         <a href="{url_for('summarization')}"> Summarize Editor</a>
         <br>
+        #Samiya
         <a href="{url_for('synonym')}"> Synonym Editor</a>  
         <br>
         # Gianna
@@ -76,12 +77,18 @@ def about_page():
     print('processing / route')
     return f'''
         <h1>About Page</h>
-        <h1>Method 1: Grammar: This method edits the grammar of the prompted text. </h1>
-        <h1>Method 2: Summarization: This method can be used to summarize a given text by adding the prompt. </h1>
-        <h1>Method 3: Synonym: This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt. </h1>
-        <h1>Method 4: Spanish Translation: This method can be used to translate a given text to a target language by adding the prompt. </h1>
-        <h1>Method 5: Paraphrase: This method can be used to paraphrase a given text by adding the prompt. </h1>
-        <h1>Method 6: Poem: This method can be used to generate a poem based on a given prompt by adding the prompt. </h1>
+        <h1>Method 1: Grammar </h1>
+            <p> This method edits the grammar of the prompted text. </p>
+        <h1>Method 2: Summarization </h1>
+            <p> This method can be used to summarize a given text by adding the prompt. </p>
+        <h1>Method 3: Synonym </h1>
+            <p>  This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt.  </p>
+        <h1>Method 4: Spanish Translation </h1>
+            <p> This method can be used to translate a given text to a target language by adding the prompt.  </p>
+        <h1>Method 5: Paraphrase </h1>
+            <p> This method can be used to paraphrase a given text by adding the prompt.</p>
+        <h1>Method 6: Poem </h1>
+            <p> This method can be used to generate a poem based on a given prompt by adding the prompt. </p>
     '''
 
 @app.route('/team')
@@ -232,7 +239,7 @@ def translation():
         '''
     else:
         return '''
-        <h1 > GPT Spanish Translator < /h1 >
+        <h1 > GPT Spanish Translator </h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >

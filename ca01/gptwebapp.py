@@ -71,14 +71,31 @@ def about_page():
     print('processing / route')
     return f'''
         <h1>About Page</h>
-        <h1>Method 1: Grammar: This method edits the grammar of the prompted text. </h>
-        <h1>Method 2: Summarization: This method can be used to summarize a given text by adding the prompt. </h>
-        <h1>Method 3: Synonym: This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt. </h>
-        <h1>Method 4: Translation: This method can be used to translate a given text to a target language by adding the prompt. </h>
-        <h1>Method 5: Paraphrase: This method can be used to paraphrase a given text by adding the prompt. </h>
-        <h1>Method 6: Poem: This method can be used to generate a poem based on a given prompt by adding the prompt. </h>
+        <h1>Method 1: Grammar: This method edits the grammar of the prompted text. </h1>
+        <h1>Method 2: Summarization: This method can be used to summarize a given text by adding the prompt. </h1>
+        <h1>Method 3: Synonym: This method can be used to generate sysnonyms of a word based on a given prompt by adding the prompt. </h1>
+        <h1>Method 4: Translation: This method can be used to translate a given text to a target language by adding the prompt. </h1>
+        <h1>Method 5: Paraphrase: This method can be used to paraphrase a given text by adding the prompt. </h1>
+        <h1>Method 6: Poem: This method can be used to generate a poem based on a given prompt by adding the prompt. </h1>
     '''
 
+@app.route('/team')
+def team():
+    '''display a link to the about page'''
+    print('processing / route')
+    return f'''
+        <h1>Gianna Everette</h1>
+            <p> Gianna is a sophomore majoring in Computer Science and minorig in physics. She was responsible for the Translation page.</p>
+        <h1>Samiyanaur Islam</h1>
+            <p> Samiya is a sophomore majoring in Computer Science and Business. She was responsible for the Summarize and Synonym pages.</p>
+        <h1>Jaime Louie</h1>
+            <p> Jaime is a sophomore majoring in Computer Science. She was responsible for the Grammar page.</p>
+        <h1>Cindy Chi</h1>
+            <p> Cindy is a sophomore majoring in Business and minorig in HSSP and Computer Science. She was responsible for the Paraphrase page.</p>
+        <h1>Allison Chanin</h1>
+            <p> Allison is a sophomore majoring in Computer Science and Applied Mathematics. She was responsible for the Poem page.</p>
+    
+    '''
 
 @app.route('/gptdemo', methods=['GET', 'POST'])
 def gptdemo():

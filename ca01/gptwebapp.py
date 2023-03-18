@@ -95,7 +95,7 @@ def gptdemo():
         '''
     else:
         return '''
-        <h1 > GPT Demo App < /h1 >
+        <h1> GPT Demo App </h1>
         Enter your query below
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
@@ -132,24 +132,24 @@ def grammar():
 @app.route('/index/summarization', methods=['GET', 'POST'])
 def summarization():
     ''' handle a get request by sending a form
-        and a post request by returning the GPT edited text
+        and a post request by returning the GPT summarized text
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.edit_grammar(prompt)
+        answer = gptAPI.get_summarization(prompt)
         return f'''
-    <h1 > GPT Summarize Editor < /h1 >
+    <h1 > GPT Summarizer < /h1 >
         Your input was:
         <pre style = "border:thin solid black" > {prompt} < /pre >
         <hr >
-        Your edited text is:
+        Your summarized text is:
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('summarization')} > edit more text < /a >
+        <a href = {url_for('summarization')} > summarize more text < /a >
         '''
     else:
         return '''
-        <h1 > GPT Summarize Editor < /h1 >
+        <h1 > GPT Summarizer < /h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
@@ -159,25 +159,25 @@ def summarization():
 @app.route('/index/synonym', methods=['GET', 'POST'])
 def synonym():
     ''' handle a get request by sending a form
-        and a post request by returning the GPT edited text
+        and a post request by returning the GPT synonyms
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.edit_grammar(prompt)
+        answer = gptAPI.get_synonyms(prompt)
         return f'''
     
-        <h1 > GPT Synonym Editor < /h1 >
+        <h1 > GPT Synonym Generator < /h1 >
         Your input was:
         <pre style = "border:thin solid black" > {prompt} < /pre >
         <hr >
-        Your edited text is:
+        Your synonyms are:
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('synonym')} > edit more text < /a >
+        <a href = {url_for('synonym')} > get more synonyms < /a >
         '''
     else:
         return '''
-        <h1 > GPT Synonym Editor < /h1 >
+        <h1 > GPT Synonym Generator < /h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
@@ -187,24 +187,24 @@ def synonym():
 @app.route('/index/translation', methods=['GET', 'POST'])
 def translation():
     ''' handle a get request by sending a form
-        and a post request by returning the GPT edited text
+        and a post request by returning the GPT translated text
     '''
     if request.method == 'POST':
         prompt = request.form['prompt']
-        answer = gptAPI.get_translation(prompt)
+        answer = gptAPI.edit_grammar(prompt)
         return f'''
-    <h1 > GPT Translation Editor < /h1 >
+    <h1 > GPT Translator < /h1 >
         Your input was:
         <pre style = "border:thin solid black" > {prompt} < /pre >
         <hr >
-        Your edited text is :
+        Your translation is :
         <div style = "border:thin solid black" > {answer} < /div >
         <br >
-        <a href = {url_for('translation')} > edit more text < /a >
+        <a href = {url_for('translation')} > translate more text < /a >
         '''
     else:
         return '''
-        <h1 > GPT Translation Editor < /h1 >
+        <h1 > GPT Translator < /h1 >
         Enter your text below:
         <form method = "post" >
             <textarea name = "prompt" > </textarea >
@@ -212,6 +212,37 @@ def translation():
         </form >
         '''
 
+@app.route('/index/paraphrase', methods=['GET', 'POST'])
+def paraphrase():
+    ''' handle a get request by sending a form
+        and a post request by returning the GPT edited text
+    '''
+    if request.method == 'POST':
+        prompt = request.form['prompt']
+        answer = gptAPI.get_paraphrase(prompt)
+        return f'''
+    <h1 > GPT Paraphraser < /h1 >
+        Your input was:
+        <pre style = "border:thin solid black" > {prompt} < /pre >
+        <hr >
+        Your edited text is :
+        <div style = "border:thin solid black" > {answer} < /div >
+        <br >
+        <a href = {url_for('paraphrase')} > paraphrase more text < /a >
+        '''
+    else:
+        return '''
+        <h1 > GPT Paraphraser < /h1 >
+        Enter your text below:
+        <form method = "post" >
+            <textarea name = "prompt" > </textarea >
+            <p > <input type = submit value = "get response" >
+        </form >
+        '''
+    
+    
+    
+   
 
 if __name__=='__main__':
     # run the code on port 5001, MacOS uses port 5000 for its own service :(

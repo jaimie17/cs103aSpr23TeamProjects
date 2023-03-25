@@ -181,14 +181,14 @@ def toplevel():
     if len(sys.argv)==1:
         # they didn't pass any arguments, 
         # so prompt for them in a loop
-        print_usage()
+        print_menu()
         args = []
         while args!=['']:
             args = input("command> ").split(' ')
             if args[0]=='5':
                 # join everyting after the name as a string
                 args = ['5',args[1]," ".join(args[2:])]
-            if agrs[0]=='0':
+            if args[0]=='0':
                 break;
             process_transaction_args(args)
             print('-'*40+'\n'*3)
@@ -197,7 +197,6 @@ def toplevel():
         args = sys.argv[1:]
         process_args(args)
         print('-'*40+'\n'*3)
-
     
 
 toplevel()

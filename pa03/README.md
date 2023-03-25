@@ -13,8 +13,8 @@ Many software projects use SQLite to manage their data and this problem set will
 <br>4. Cindy Chi
 <br/>5. Allison Chanin
 
-#### Script of Running Pylint
+### Script of Running Pylint:
 
-### Script of Running Pytest
+### Script of Running Pytest:
 
-### Script Running tracker.py
+### Script Running tracker.py:

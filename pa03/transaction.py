@@ -29,46 +29,58 @@ import sqlite3
 import os
 
 def toDict(t):
-    ''' t is a tuple (rowid, title, desc, completed)'''
+    ''' t is a tuple (item #, amount, category, date, description)'''
     print('t='+str(t))
-    todo = {'rowid':t[0], 'title':t[1], 'desc':t[2], 'completed':t[3]}
+    todo = {'rowid':t[0], 'item #':t[1], 'amount':t[2], 'category':t[3], 'date':t[4], 'description':t[5]}
     return todo
 
 class Transaction():
-    def __init__(self):
-        self.runQuery('''CREATE TABLE IF NOT EXISTS todo
-                    (title text, desc text, completed int)''',())
-    
-    def selectActive(self):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo where completed=0",())
+    def __init__(self, db_file):
+        self.db_file = db_file
+        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
+                    (item # int, amount real, category text, date text, description text)''',())
 
-    def selectAll(self):
-        ''' return all of the tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo",())
+    def show_categories(self):
+        ''' return a list of all categories'''
+        return self.runQuery("SELECT DISTINCT category from transactions",())
 
-    def selectCompleted(self):
-        ''' return all of the completed tasks as a list of dicts.'''
-        return self.runQuery("SELECT rowid,* from todo where completed=1",())
+    def add_category(self, category):
+        ''' create a new category '''
+        return self.runQuery("INSERT INTO transactions (category) VALUES (?)",(category,))
 
-    def add(self,item):
-        ''' create a todo item and add it to the todo table '''
-        return self.runQuery("INSERT INTO todo VALUES(?,?,?)",(item['title'],item['desc'],item['completed']))
+    def modify_category(self, old_category, new_category):
+        ''' modify an existing category '''
+        return self.runQuery("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
 
-    def delete(self,rowid):
-        ''' delete a todo item '''
-        return self.runQuery("DELETE FROM todo WHERE rowid=(?)",(rowid,))
+    def show_transactions(self):
+        ''' return all of the transactions as a list of dicts.'''
+        return self.runQuery("SELECT * from transactions",())
 
-    def setComplete(self,rowid):
-        ''' mark a todo item as completed '''
-        return self.runQuery("UPDATE todo SET completed=1 WHERE rowid=(?)",(rowid,))
+    def add_transaction(self, transaction):
+        ''' create a new transaction and add it to the transactions table '''
+        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
+                             (transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
 
-    def runQuery(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
-        con= sqlite3.connect(os.getenv('HOME')+'/todo.db')
-        cur = con.cursor() 
-        cur.execute(query,tuple)
-        tuples = cur.fetchall()
-        con.commit()
-        con.close()
-        return [toDict(t) for t in tuples]
+    def delete_transaction(self, item_no):
+        ''' delete a transaction '''
+        return self.runQuery("DELETE FROM transactions WHERE item_no=?", (item_no,))
+
+    def summarize_transactions_by_date(self):
+        ''' summarize transactions by date '''
+        return self.runQuery("SELECT date, SUM(amount) FROM transactions GROUP BY date",())
+
+    def summarize_transactions_by_month(self):
+        ''' summarize transactions by month '''
+        return self.runQuery("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month",())
+
+    def summarize_transactions_by_year(self):
+        ''' summarize transactions by year '''
+        return self.runQuery("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year",())
+
+    def summarize_transactions_by_category(self):
+        ''' summarize transactions by category '''
+        return self.runQuery("SELECT category, SUM(amount) FROM transactions GROUP BY category",())
+
+    def print_menu(self):
+        ''' print the menu options '''
+        menu = '''Menu:'''

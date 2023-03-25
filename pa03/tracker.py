@@ -87,36 +87,36 @@ def print_todos(todos):
         values = tuple(item.values()) #(rowid,title,desc,completed)
         print("%-10s %-10s %-30s %2d"%values)
 
-def process_args(arglist):
-    ''' examine args and make appropriate calls to TodoList'''
-    todolist = TodoList()
-    if arglist==[]:
-        print_usage()
-    elif arglist[0]=="show":
-        print_todos(todolist.selectActive())
-    elif arglist[0]=="showall":
-        print_todos(todos = todolist.selectAll())
-    elif arglist[0]=="showcomplete":
-        print_todos(todolist.selectCompleted())
-    elif arglist[0]=='add':
-        if len(arglist)!=3:
-            print_usage()
-        else:
-            todo = {'title':arglist[1],'desc':arglist[2],'completed':0}
-            todolist.add(todo)
-    elif arglist[0]=='complete':
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            todolist.setComplete(arglist[1])
-    elif arglist[0]=='delete':
-        if len(arglist)!= 2:
-            print_usage()
-        else:
-            todolist.delete(arglist[1])
-    else:
-        print(arglist,"is not implemented")
-        print_usage()
+# def process_args(arglist):
+#     ''' examine args and make appropriate calls to TodoList'''
+#     todolist = TodoList()
+#     if arglist==[]:
+#         print_usage()
+#     elif arglist[0]=="show":
+#         print_todos(todolist.selectActive())
+#     elif arglist[0]=="showall":
+#         print_todos(todos = todolist.selectAll())
+#     elif arglist[0]=="showcomplete":
+#         print_todos(todolist.selectCompleted())
+#     elif arglist[0]=='add':
+#         if len(arglist)!=3:
+#             print_usage()
+#         else:
+#             todo = {'title':arglist[1],'desc':arglist[2],'completed':0}
+#             todolist.add(todo)
+#     elif arglist[0]=='complete':
+#         if len(arglist)!= 2:
+#             print_usage()
+#         else:
+#             todolist.setComplete(arglist[1])
+#     elif arglist[0]=='delete':
+#         if len(arglist)!= 2:
+#             print_usage()
+#         else:
+#             todolist.delete(arglist[1])
+#     else:
+#         print(arglist,"is not implemented")
+#         print_usage()
         
         
         

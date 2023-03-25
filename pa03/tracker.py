@@ -81,7 +81,7 @@ def print_todos(todos):
         print('no tasks to print')
         return
     print('\n')
-    print("%-10s %-10s %-30s %-10s"%('item #','amount','category','date', 'description'))
+    print("%-10s %-10s %-30s %-10s %-10s"%('item #','amount','category','date','description'))
     print('-'*40)
     for item in todos:
         values = tuple(item.values()) #(rowid,title,desc,completed)

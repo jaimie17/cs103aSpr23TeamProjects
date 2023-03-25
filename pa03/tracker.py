@@ -185,10 +185,12 @@ def toplevel():
         args = []
         while args!=['']:
             args = input("command> ").split(' ')
-            if args[0]=='add':
+            if args[0]=='5':
                 # join everyting after the name as a string
-                args = ['add',args[1]," ".join(args[2:])]
-            process_args(args)
+                args = ['5',args[1]," ".join(args[2:])]
+            if agrs[0]=='0':
+                break;
+            process_transaction_args(args)
             print('-'*40+'\n'*3)
     else:
         # read the args and process them

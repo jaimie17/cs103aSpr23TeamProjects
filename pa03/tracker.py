@@ -57,15 +57,21 @@ import sys
 
 # here are some helper functions ...
 
-def print_usage():
-    ''' print an explanation of how to use this command '''
-    print('''usage:
-            todo show
-            todo showall
-            todo showcomplete
-            todo add name description
-            todo complete item_id
-            todo delete item_id
+def print_menu():
+    ''' print an menu of the commands '''
+    print('''Commands:
+            0. quit
+            1. show categories
+            2. add category
+            3. modify category
+            4. show transactions
+            5. add transaction
+            6. delete transaction
+            7. summarize transactions by date
+            8. summarize transactions by month
+            9. summarize transactions by year
+            10. summarize transactions by category
+            11. print this menu
             '''
             )
 
@@ -75,7 +81,7 @@ def print_todos(todos):
         print('no tasks to print')
         return
     print('\n')
-    print("%-10s %-10s %-30s %-10s"%('item #','title','desc','completed'))
+    print("%-10s %-10s %-30s %-10s"%('item #','amount','category','date', 'description'))
     print('-'*40)
     for item in todos:
         values = tuple(item.values()) #(rowid,title,desc,completed)

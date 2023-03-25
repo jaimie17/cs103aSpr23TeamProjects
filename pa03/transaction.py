@@ -37,11 +37,15 @@ def toDict(t):
 class Transaction():
     def __init__(self, db_file):
         self.db_file = db_file
+        if not os.path.exists(db_file):
+            conn = sqlite3.connect(db_file)
+            cur = conn.cursor()
+            cur.execute('''CREATE TABLE transactions
+                            (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
+            conn.commit()
+            conn.close()
         self.conn = sqlite3.connect(db_file)
         self.cur = self.conn.cursor()
-        self.cur.execute('''CREATE TABLE IF NOT EXISTS transactions
-                            (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
-        self.conn.commit()
 
     def show_categories(self):
         ''' return a list of all categories'''

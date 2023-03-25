@@ -10,7 +10,7 @@ import sqlite3
 from transaction import Transaction
 
 
-class TestTransaction(unittest.TestCase):
+class test_transaction(unittest.TestCase):
     def setUp(self):
         # create an in-memory database for testing
         self.conn = sqlite3.connect(':memory:')
@@ -27,8 +27,7 @@ class TestTransaction(unittest.TestCase):
         self.transaction.add_category('entertainment')
 
         # test if the show_categories method returns the correct list of categories
-        self.assertEqual(self.transaction.show_categories(), [
-                         ('food',), ('transportation',), ('entertainment',)])
+        self.assertEqual(self.transaction.show_categories(), [('food',), ('transportation',), ('entertainment',)])
 
     def test_add_category(self):
         # add a category to the database
@@ -49,28 +48,22 @@ class TestTransaction(unittest.TestCase):
 
     def test_show_transactions(self):
         # add some transactions to the database
-        self.transaction.add_transaction(
-            {'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
-        self.transaction.add_transaction(
-            {'amount': 20.0, 'category': 'transportation', 'date': '2022-01-02', 'description': 'gas'})
+        self.transaction.add_transaction({'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
+        self.transaction.add_transaction({'amount': 20.0, 'category': 'transportation', 'date': '2022-01-02', 'description': 'gas'})
 
         # test if the show_transactions method returns the correct list of transactions
-        self.assertEqual(self.transaction.show_transactions(), [
-                         (1, 10.5, 'food', '2022-01-01', 'groceries'), (2, 20.0, 'transportation', '2022-01-02', 'gas')])
+        self.assertEqual(self.transaction.show_transactions(), [(1, 10.5, 'food', '2022-01-01', 'groceries'), (2, 20.0, 'transportation', '2022-01-02', 'gas')])
 
     def test_add_transaction(self):
         # add a transaction to the database
-        self.transaction.add_transaction(
-            {'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
+        self.transaction.add_transaction({'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
 
         # test if the transaction has been added successfully
-        self.assertEqual(self.transaction.show_transactions(), [
-                         (1, 10.5, 'food', '2022-01-01', 'groceries')])
+        self.assertEqual(self.transaction.show_transactions(), [(1, 10.5, 'food', '2022-01-01', 'groceries')])
 
     def test_delete_transaction(self):
         # add a transaction to the database
-        self.transaction.add_transaction(
-            {'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
+        self.transaction.add_transaction({'amount': 10.5, 'category': 'food', 'date': '2022-01-01', 'description': 'groceries'})
 
         # delete the transaction
         self.transaction.delete_transaction(1)
@@ -105,8 +98,7 @@ class TestTransaction(unittest.TestCase):
         self.transaction.insert_transaction("2022-03-20", "test6", 125, "food")
 
         # Expected result
-        expected_result = [("2022-01", 300.0),
-                        ("2022-02", 200.0), ("2022-03", 200.0)]
+        expected_result = [("2022-01", 300.0),("2022-02", 200.0), ("2022-03", 200.0)]
 
         # Test the method
         result = self.db.summarize_transactions_by_month()

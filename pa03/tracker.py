@@ -117,7 +117,64 @@ def process_args(arglist):
     else:
         print(arglist,"is not implemented")
         print_usage()
+        
+        
+        
+def process_transaction_args(arglist):
+    ''' examine args and make appropriate calls to TodoList'''
+    transactions = Transaction()
+    if arglist==[]:
+        print_menu()
+    elif arglist[0]==str(4): #show transactions
+        print_money(transactions.show_transactions())
 
+
+    # elif arglist[0]==str(1): #show categories
+    #     print_money(todos = transactions.show_categories())
+
+    #FROM TO DO LIST     
+    # elif arglist[0]=="showcomplete":
+    #     print_todos(transactions.selectCompleted())
+
+
+    # elif arglist[0]==str(2): #add categories
+    #     if len(arglist)!=3:
+    #         print_menu()
+    #     else:
+    #         todo = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3],'description':0}
+    #         transactions.add_category(todo) #change params
+
+
+    elif arglist[0]==str(5): #add transaction
+        if len(arglist)!=3:
+            print_menu()
+        else:
+            todo = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3],'description':0}
+            transactions.add_transaction(todo) #change params
+
+    #FROM TO DO LIST
+    # elif arglist[0]=='complete':
+    #     if len(arglist)!= 2:
+    #         print_usage()
+    #     else:
+    #         transactions.setComplete(arglist[1])
+
+
+    # elif arglist[0]==str(3): #modify category
+    #     if len(arglist)!= 2:
+    #         print_menu()
+    #     else:
+    #         transactions.modify_category(arglist[1])
+
+
+    elif arglist[0]==str(6): #delete transaction
+        if len(arglist)!= 2:
+            print_menu()
+        else:
+            transactions.delete_transaction(arglist[1])
+    else:
+        print(arglist,"is not implemented")
+        print_menu()
 
 def toplevel():
     ''' read the command args and process them'''

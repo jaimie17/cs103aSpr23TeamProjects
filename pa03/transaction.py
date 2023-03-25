@@ -37,50 +37,66 @@ def toDict(t):
 class Transaction():
     def __init__(self, db_file):
         self.db_file = db_file
-        self.runQuery('''CREATE TABLE IF NOT EXISTS transactions
-                    (item # int, amount real, category text, date text, description text)''',())
+        self.conn = sqlite3.connect(db_file)
+        self.cur = self.conn.cursor()
+        self.cur.execute('''CREATE TABLE IF NOT EXISTS transactions
+                            (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
+        self.conn.commit()
 
     def show_categories(self):
         ''' return a list of all categories'''
-        return self.runQuery("SELECT DISTINCT category from transactions",())
+        self.cur.execute("SELECT DISTINCT category from transactions")
+        return [row[0] for row in self.cur.fetchall()]
 
     def add_category(self, category):
         ''' create a new category '''
-        return self.runQuery("INSERT INTO transactions (category) VALUES (?)",(category,))
+        self.cur.execute("INSERT INTO transactions (category) VALUES (?)", (category,))
+        self.conn.commit()
 
     def modify_category(self, old_category, new_category):
         ''' modify an existing category '''
-        return self.runQuery("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
+        self.cur.execute("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
+        self.conn.commit()
 
     def show_transactions(self):
         ''' return all of the transactions as a list of dicts.'''
-        return self.runQuery("SELECT * from transactions",())
+        self.cur.execute("SELECT * from transactions")
+        rows = self.cur.fetchall()
+        return [toDict(row) for row in rows]
 
     def add_transaction(self, transaction):
         ''' create a new transaction and add it to the transactions table '''
-        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
-                             (transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
+        self.cur.execute("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
+                          (transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
+        self.conn.commit()
 
     def delete_transaction(self, item_no):
         ''' delete a transaction '''
-        return self.runQuery("DELETE FROM transactions WHERE item_no=?", (item_no,))
+        self.cur.execute("DELETE FROM transactions WHERE item_no=?", (item_no,))
+        self.conn.commit()
 
     def summarize_transactions_by_date(self):
         ''' summarize transactions by date '''
-        return self.runQuery("SELECT date, SUM(amount) FROM transactions GROUP BY date",())
+        self.cur.execute("SELECT date, SUM(amount) FROM transactions GROUP BY date")
+        return self.cur.fetchall()
 
     def summarize_transactions_by_month(self):
         ''' summarize transactions by month '''
-        return self.runQuery("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month",())
+        self.cur.execute("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month")
+        return self.cur.fetchall()
 
     def summarize_transactions_by_year(self):
         ''' summarize transactions by year '''
-        return self.runQuery("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year",())
+        self.cur.execute("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year")
+        return self.cur.fetchall()
 
     def summarize_transactions_by_category(self):
         ''' summarize transactions by category '''
-        return self.runQuery("SELECT category, SUM(amount) FROM transactions GROUP BY category",())
+        self.cur.execute("SELECT category, SUM(amount) FROM transactions GROUP BY category")
+        return self.cur.fetchall()
 
-    def print_menu(self):
-        ''' print the menu options '''
-        menu = '''Menu:'''
+    def runQuery(self, query, params):
+        ''' execute an arbitrary SQL query '''
+        self.cur.execute(query, params)
+        self.conn.commit()
+        return self.cur.fetchall()

@@ -51,7 +51,7 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 
 '''
 
-from todolist import TodoList
+from transaction import Transaction
 import sys
 
 

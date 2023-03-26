@@ -12,7 +12,99 @@ Many software projects use SQLite to manage their data and this problem set will
 <br>3. Samiyanur Islam
 <br/>4. Cindy Chi
 
-### Script of Running Pylint:
+### Script of Running Pylint before modifications:
+PS C:\Users\Jaimie\Desktop\cs103aSpr23TeamProjects\pa03> python -m pylint transaction.py
+************* Module transaction
+transaction.py:31:0: C0301: Line too long (115/100) (line-too-long)
+transaction.py:33:0: C0301: Line too long (113/100) (line-too-long)
+transaction.py:48:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+transaction.py:50:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+transaction.py:52:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+transaction.py:53:0: W0311: Bad indentation. Found 7 spaces, expected 8 (bad-indentation)
+transaction.py:54:0: C0303: Trailing whitespace (trailing-whitespace)
+transaction.py:64:0: C0301: Line too long (119/100) (line-too-long)
+transaction.py:17:0: C0115: Missing class docstring (missing-class-docstring)
+transaction.py:22:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:31:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:31:4: R0913: Too many arguments (6/5) (too-many-arguments)
+transaction.py:38:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:38:33: C0103: Argument name "id" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:38:33: W0622: Redefining built-in 'id' (redefined-builtin)
+transaction.py:41:8: W0612: Unused variable 'result' (unused-variable)
+transaction.py:47:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:55:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:63:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:63:30: W0613: Unused argument 'category' (unused-argument)
+transaction.py:71:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:75:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:81:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:86:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:91:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:96:4: C0116: Missing function or method docstring (missing-function-docstring)
+transaction.py:15:0: W0611: Unused import os (unused-import)
+
+-----------------------------------
+Your code has been rated at 5.18/10
+
+PS C:\Users\Jaimie\Desktop\cs103aSpr23TeamProjects\pa03> python -m pylint tracker.py
+************* Module tracker
+tracker.py:2:0: C0301: Line too long (113/100) (line-too-long)
+tracker.py:26:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:27:70: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:60:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:76:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:77:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:87:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:88:41: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:95:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:96:65: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:103:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:104:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:114:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:125:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:126:45: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:135:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:136:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:142:0: C0303: Trailing whitespace (trailing-whitespace)
+tracker.py:182:0: C0305: Trailing newlines (trailing-newlines)
+tracker.py:21:0: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:22:0: C0115: Missing class docstring (missing-class-docstring)
+tracker.py:27:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:28:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:33:12: R1723: Unnecessary "elif" after "break", remove the leading "el" from "elif" (no-else-break)
+tracker.py:28:4: R0912: Too many branches (14/12) (too-many-branches)
+tracker.py:61:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:62:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:78:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:79:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:88:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:89:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:96:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:97:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:99:11: E1101: Instance of 'Transaction' has no 'get_category' member (no-member)
+tracker.py:116:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:117:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:123:16: C0103: Variable name "t" doesn't conform to snake_case naming style (invalid-name)
+tracker.py:126:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:127:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:137:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:138:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:139:8: W0622: Redefining built-in 'id' (redefined-builtin)
+tracker.py:139:8: C0103: Variable name "id" doesn't conform to snake_case naming style (invalid-name)
+tracker.py:143:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:144:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:152:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:153:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:161:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:162:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:170:4: W0105: String statement has no effect (pointless-string-statement)
+tracker.py:171:4: C0116: Missing function or method docstring (missing-function-docstring)
+tracker.py:110:12: W0201: Attribute 'categories' defined outside __init__ (attribute-defined-outside-init)
+
+-----------------------------------
+Your code has been rated at 5.79/10
+
+### Script of Running Pylint after modifications:
 
 
 ### Script of Running Pytest:

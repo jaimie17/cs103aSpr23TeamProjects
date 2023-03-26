@@ -105,7 +105,31 @@ tracker.py:110:12: W0201: Attribute 'categories' defined outside __init__ (attri
 Your code has been rated at 5.79/10
 
 ### Script of Running Pylint after modifications:
+PS C:\Users\Jaimie\Desktop\cs103aSpr23TeamProjects\pa03> python -m pylint transaction.py
+************* Module transaction
+transaction.py:36:0: C0301: Line too long (115/100) (line-too-long)
+transaction.py:42:0: C0301: Line too long (113/100) (line-too-long)
+transaction.py:81:0: C0301: Line too long (119/100) (line-too-long)
+transaction.py:36:4: R0913: Too many arguments (6/5) (too-many-arguments)
+transaction.py:47:33: C0103: Argument name "id" doesn't conform to snake_case naming style (invalid-name)
+transaction.py:47:33: W0622: Redefining built-in 'id' (redefined-builtin)
+transaction.py:52:8: W0612: Unused variable 'result' (unused-variable)
+transaction.py:78:30: W0613: Unused argument 'category' (unused-argument)
 
+------------------------------------------------------------------
+Your code has been rated at 8.55/10 (previous run: 5.18/10, +3.37)
+
+PS C:\Users\Jaimie\Desktop\cs103aSpr23TeamProjects\pa03> python -m pylint tracker.py
+************* Module tracker
+tracker.py:30:4: R0912: Too many branches (14/12) (too-many-branches)
+tracker.py:106:11: E1101: Instance of 'Transaction' has no 'get_category' member (no-member)
+tracker.py:131:16: C0103: Variable name "t" doesn't conform to snake_case naming style (invalid-name)
+tracker.py:148:8: W0622: Redefining built-in 'id' (redefined-builtin)
+tracker.py:148:8: C0103: Variable name "id" doesn't conform to snake_case naming style (invalid-name)
+tracker.py:118:12: W0201: Attribute 'categories' defined outside __init__ (attribute-defined-outside-init)
+
+------------------------------------------------------------------
+Your code has been rated at 9.17/10 (previous run: 5.79/10, +3.38)
 
 ### Script of Running Pytest:
 PS C:\Users\Jaimie\Desktop\cs103aSpr23TeamProjects> python -m pytest -v

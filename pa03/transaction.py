@@ -85,11 +85,6 @@ class Transaction:
             return None
         return result[0]
 
-    def modify_transaction(self, item_number: str, column_name: str, new_value: str) -> None:
-        self.conn.execute(
-            f"UPDATE transactions SET {column_name} = '{new_value}' WHERE item_number = '{item_number}'")
-        self.conn.commit()
-
     def get_transactions(self) -> List[Tuple]:
         cursor = self.conn.execute("SELECT * FROM transactions")
         return cursor.fetchall()

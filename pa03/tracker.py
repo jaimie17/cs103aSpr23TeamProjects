@@ -122,7 +122,7 @@ def print_todos(todos):
         
 def process_transaction_args(arglist):
     ''' examine args and make appropriate calls to TodoList'''
-    transactions = Transaction()
+    transactions = Transaction(db_file)
     if arglist==[]:
         print_menu()
     elif arglist[0]==str(4): #show transactions

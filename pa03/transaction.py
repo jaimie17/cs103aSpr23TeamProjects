@@ -35,72 +35,59 @@ def toDict(t):
     return todo
 
 class Transaction():
-    def __init__(self, db_file):
-        self.db_file = db_file
-        if not os.path.exists(db_file):
-            conn = sqlite3.connect(db_file)
-            cur = conn.cursor()
-            cur.execute('''CREATE TABLE transactions
-                            (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
-            conn.commit()
-            conn.close()
-        self.conn = sqlite3.connect(db_file)
-        self.cur = self.conn.cursor()
+    def __init__(self):
+        ''' create a connection to the database '''
+        self.runQuery('''CREATE TABLE transactions
+                    (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
 
     def show_categories(self):
         ''' return a list of all categories'''
-        self.cur.execute("SELECT DISTINCT category from transactions")
-        return [row[0] for row in self.cur.fetchall()]
+        return self.runQuery("SELECT DISTINCT category from transactions")
 
     def add_category(self, category):
         ''' create a new category '''
-        self.cur.execute("INSERT INTO transactions (category) VALUES (?)", (category,))
-        self.conn.commit()
+        return self.runQuery("INSERT INTO transactions (category) VALUES (?)", (category,))
 
     def modify_category(self, old_category, new_category):
         ''' modify an existing category '''
-        self.cur.execute("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
-        self.conn.commit()
+        return self.runQuery("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
 
     def show_transactions(self):
         ''' return all of the transactions as a list of dicts.'''
-        self.cur.execute("SELECT * from transactions")
-        rows = self.cur.fetchall()
-        return [toDict(row) for row in rows]
+        return self.runQuery("SELECT * from transactions")
 
     def add_transaction(self, transaction):
         ''' create a new transaction and add it to the transactions table '''
-        self.cur.execute("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
+        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
                           (transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
-        self.conn.commit()
 
     def delete_transaction(self, item_no):
         ''' delete a transaction '''
-        self.cur.execute("DELETE FROM transactions WHERE item_no=?", (item_no,))
-        self.conn.commit()
+        return self.runQuery("DELETE FROM transactions WHERE item_no=?", (item_no,))
 
     def summarize_transactions_by_date(self):
         ''' summarize transactions by date '''
-        self.cur.execute("SELECT date, SUM(amount) FROM transactions GROUP BY date")
-        return self.cur.fetchall()
+        return self.runQuery("SELECT date, SUM(amount) FROM transactions GROUP BY date")
+
 
     def summarize_transactions_by_month(self):
         ''' summarize transactions by month '''
-        self.cur.execute("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month")
-        return self.cur.fetchall()
+        return self.runQuery("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month")
 
     def summarize_transactions_by_year(self):
         ''' summarize transactions by year '''
-        self.cur.execute("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year")
-        return self.cur.fetchall()
+        return self.runQuery("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year")
 
     def summarize_transactions_by_category(self):
         ''' summarize transactions by category '''
-        self.cur.execute("SELECT category, SUM(amount) FROM transactions GROUP BY category")
-        return self.cur.fetchall()
+        return self.runQuery("SELECT category, SUM(amount) FROM transactions GROUP BY category")
 
-    def runQuery(self, query, params):
-        ''' execute an arbitrary SQL query '''
-        self.cur.execute(query, params)
-        self.conn.commit()
-        return self.cur.fetchall()
+    def runQuery(self,query,tuple):
+        ''' return all of the uncompleted tasks as a list of dicts.'''
+        con= sqlite3.connect(os.getenv('HOME')+'/todo.db')
+        cur = con.cursor() 
+        cur.execute(query,tuple)
+        tuples = cur.fetchall()
+        con.commit()
+        con.close()
+        return [toDict(t) for t in tuples]

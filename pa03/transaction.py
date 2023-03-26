@@ -58,12 +58,30 @@ class Transaction:
             print(
                 f"Failed to delete transaction {item_number}. Transaction not found.")
             return
-
         # delete the transaction if it exists
         self.conn.execute(
             f"DELETE FROM transactions WHERE item_number = '{item_number}'")
         self.conn.commit()
         print(f"Transaction {item_number} deleted successfully.")
+
+
+    def add_category(self, category: str) -> bool:
+       if self.get_category_id(category):
+            print("Category already exists")
+            return False
+       self.conn.execute(
+            f"INSERT INTO categories (name) VALUES ('{category}')")
+       self.conn.commit()
+       print(f"Category {category} added successfully")
+       return True
+    
+    def get_category_id(self, category: str) -> int:
+        cursor = self.conn.execute('''CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY, category TEXT)''')
+        #ALTER TABLE categories ADD COLUMN name TEXT
+        result = cursor.fetchone()
+        if not result:
+            return None
+        return result[0]
 
     def modify_transaction(self, item_number: str, column_name: str, new_value: str) -> None:
         self.conn.execute(

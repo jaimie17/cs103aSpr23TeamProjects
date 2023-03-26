@@ -54,14 +54,13 @@ class Transaction:
     
     def modify_category(self, category: str, new_category: str) -> bool:
         if self.get_category_id(new_category):
-            print("Category already exists")
             return False
         self.conn.execute(
-            f"UPDATE categories SET name = '{new_category}' WHERE name = '{category}'")
+            f"UPDATE categories SET category = '{new_category}' WHERE category = '{category}'")
         self.conn.commit()
-        print(f"Category {category} modified to {new_category} successfully")
         return True
-    
+
+
     def get_category_id(self, category: str) -> int:
         cursor = self.conn.execute('''CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY, category TEXT)''')
         #ALTER TABLE categories ADD COLUMN name TEXT
@@ -76,7 +75,7 @@ class Transaction:
 
     def get_categories(self) -> List[str]:
         cursor = self.conn.execute(
-            "SELECT DISTINCT category FROM transactions")
+            "SELECT DISTINCT category FROM transactions UNION SELECT category FROM categories")
         categories = cursor.fetchall()
         return [category[0] for category in categories]
 

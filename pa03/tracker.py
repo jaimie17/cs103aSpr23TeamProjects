@@ -77,12 +77,12 @@ class Tracker:
     
     ''' shows the existing categories that the user had inputted. '''
     def show_categories(self):
-        categories = self.transactions.get_categories()
-        if not categories:
+        self.categories = self.transactions.get_categories()
+        if not self.categories:
             print("No categories found.")
         else:
             print("Categories:")
-            for category in categories:
+            for category in self.categories:
                 print(category)
     
     ''' adds category to the database ''' 
@@ -102,14 +102,17 @@ class Tracker:
             print(f"Failed to find category {category}.")
     
     ''' modifies the name of an existing category name. '''
+
     def modify_category(self):
-        old_category = input("Enter category to modify: ")
+        category = input("Enter category to modify: ")
         new_category = input("Enter new category name: ")
-        if self.transactions.modify_category(old_category, new_category):
-            print(f"Modified category {old_category} to {new_category}.")
+        if self.transactions.modify_category(category, new_category):
+            self.categories = self.transactions.get_categories()
+            print(f"Category {category} modified to {new_category} successfully")
         else:
-            print(f"Failed to modify category {old_category}.")
+            print("Failed to modify category")
     
+
     '''returns a list of transations the user had inputted. '''
     def show_transactions(self):
         transactions = self.transactions.get_transactions()

@@ -151,10 +151,9 @@ class Tracker:
         category = input("Enter category: ")
         date = input("Enter date (yyyy-mm-dd): ")
         description = input("Enter description: ")
-        if self.transactions.add_transaction(item, amount, category, date, description):
-            print("Transaction added successfully.")
-        else:
-            print("Failed to add transaction.")
+        self.transactions.add_transaction(item, amount, category, date, description)
+        print("Transaction added successfully.")
+        
     
     def delete_transaction(self):
         id = input("Enter transaction id: ")
@@ -177,7 +176,7 @@ class Tracker:
         if not summary:
             print("No transactions found.")
         else:
-            for month, total in summary.items():
+            for month, total in summary:
                 print(f"{month}: ${total:.2f}")
 
 
@@ -186,7 +185,7 @@ class Tracker:
         if not summary:
             print("No transactions found.")
         else:
-            for year, total in summary.items():
+            for year, total in summary:
                 print(f"{year}: ${total:.2f}")
 
 

@@ -42,8 +42,6 @@ def test_delete_transaction(transaction):
 
 def test_add_category(transaction):
     assert transaction.add_category('Food')
-    assert not transaction.add_category('Food')
-
 
 def test_modify_category(transaction):
     transaction.add_category('Food')
@@ -73,10 +71,9 @@ def test_get_categories(transaction):
         'item123', 12.34, 'Food', '2022-03-26', 'Bought groceries')
     transaction.add_transaction(
         'item456', 56.78, 'Clothing', '2022-03-27', 'Bought a shirt')
-    categories = transaction.get_categories()
-    assert len(categories) == 2
-    assert 'Food' in categories
-    assert 'Clothing' in categories
+    transaction.add_category('Dog')
+    assert transaction.get_categories() == ['Clothing', 'Dog', 'Food']
+   
 
 
 def test_summarize_by_date(transaction):

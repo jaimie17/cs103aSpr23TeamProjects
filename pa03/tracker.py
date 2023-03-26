@@ -77,12 +77,12 @@ class Tracker:
     
     ''' shows the existing categories that the user had inputted. '''
     def show_categories(self):
-        self.categories = self.transactions.get_categories()
-        if not self.categories:
+        categories = self.transactions.get_categories()
+        if not categories:
             print("No categories found.")
         else:
             print("Categories:")
-            for category in self.categories:
+            for category in categories:
                 print(category)
     
     ''' adds category to the database ''' 

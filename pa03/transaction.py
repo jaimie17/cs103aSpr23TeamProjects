@@ -60,7 +60,6 @@ class Transaction:
         self.conn.commit()
         return True
 
-
     def get_category_id(self, category: str) -> int:
         cursor = self.conn.execute('''CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY, category TEXT)''')
         #ALTER TABLE categories ADD COLUMN name TEXT

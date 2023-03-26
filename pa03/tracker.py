@@ -52,11 +52,13 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 '''
 from transaction import Transaction
 
+''' Initializes the Tracker object and takes in the database file. '''
 class Tracker:
     def __init__(self, db_file):
         self.db_file = db_file
         self.transactions = Transaction(db_file)
-        
+    
+    ''' Takes in user input of a number to run a finances command. '''   
     def run(self):
         print("Welcome to your finance tracker!")
         self.print_menu()
@@ -89,7 +91,8 @@ class Tracker:
                 self.print_menu()
             else:
                 print("Invalid choice, please try again.")
-    
+                
+    ''' prints out the menu to perform various finance commands. '''
     def print_menu(self):
         print("\nPlease choose from the following options:")
         print("0. Quit")
@@ -105,6 +108,8 @@ class Tracker:
         print("10. Summarize transactions by category")
         print("11. Print this menu")
     
+    
+    ''' shows the existing categories that the user had inputted. '''
     def show_categories(self):
         categories = self.transactions.get_categories()
         if not categories:
@@ -114,6 +119,7 @@ class Tracker:
             for category in categories:
                 print(category)
     
+    ''' adds category to the database ''' 
     def add_category(self):
         category = input("Enter new category name: ")
         if self.transactions.add_category(category):
@@ -121,13 +127,15 @@ class Tracker:
         else:
             print(f"Failed to add category {category}.")
     
+    ''' returns the category the user inputs in if it exists. ''' 
     def get_category(self):
         category = input("Enter category name: ")
         if self.transactions.get_category(category):
             print(f"Found category {category}.")
         else:
             print(f"Failed to find category {category}.")
-
+    
+    ''' modifies the name of an existing category name. '''
     def modify_category(self):
         old_category = input("Enter category to modify: ")
         new_category = input("Enter new category name: ")
@@ -136,6 +144,7 @@ class Tracker:
         else:
             print(f"Failed to modify category {old_category}.")
     
+    '''returns a list of transations the user had inputted. '''
     def show_transactions(self):
         transactions = self.transactions.get_transactions()
         if not transactions:
@@ -145,6 +154,7 @@ class Tracker:
             for t in transactions:
                 print(t)
     
+    ''' adds a transaction to the database''' 
     def add_transaction(self):
         item = input("Enter item name: ")
         amount = input("Enter amount: ")
@@ -155,6 +165,7 @@ class Tracker:
         print("Transaction added successfully.")
         
     
+    ''' deletes a transaction from the database '''
     def delete_transaction(self):
         id = input("Enter transaction id: ")
         if self.transactions.delete_transaction(id):
@@ -162,6 +173,7 @@ class Tracker:
         else:
             print(f"Failed to delete transaction {id}.")
     
+    ''' will summarize the finance transactions by date'''
     def summarize_by_date(self):
         summary = self.transactions.summarize_by_date()
         if not summary:
@@ -170,7 +182,7 @@ class Tracker:
             for row in summary:
                 print(row[0], "-", row[1])
 
-
+    ''' will summarize the finance transactions by month'''
     def summarize_by_month(self):
         summary = self.transactions.summarize_by_month()
         if not summary:
@@ -179,7 +191,7 @@ class Tracker:
             for month, total in summary:
                 print(f"{month}: ${total:.2f}")
 
-
+    ''' will summarize the finance transactions by year'''
     def summarize_by_year(self):
         summary = self.transactions.summarize_by_year()
         if not summary:
@@ -188,7 +200,7 @@ class Tracker:
             for year, total in summary:
                 print(f"{year}: ${total:.2f}")
 
-
+    ''' will summarize the finance transactions by category'''
     def summarize_by_category(self):
         summary = self.transactions.summarize_by_category()
         if not summary:

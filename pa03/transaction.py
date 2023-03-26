@@ -25,69 +25,80 @@ In place of SQL queries, we will have method calls.
 This app will store the data in a SQLite database ~/todo.db
 
 '''
+from typing import List, Tuple
 import sqlite3
 import os
 
-def toDict(t):
-    ''' t is a tuple (item #, amount, category, date, description)'''
-    print('t='+str(t))
-    todo = {'rowid':t[0], 'item #':t[1], 'amount':t[2], 'category':t[3], 'date':t[4], 'description':t[5]}
-    return todo
+class Transaction:
+    def __init__(self, db_file: str) -> None:
+        self.conn = sqlite3.connect(db_file)
+        self.create_table()
 
-class Transaction():
-    def __init__(self):
-        ''' create a connection to the database '''
-        self.runQuery('''CREATE TABLE transactions
-                    (item_no INTEGER PRIMARY KEY, amount REAL, category TEXT, date TEXT, description TEXT)''')
+    def create_table(self) -> None:
+        self.conn.execute('''CREATE TABLE IF NOT EXISTS transactions
+                            (id INTEGER PRIMARY KEY,
+                             item_number TEXT,
+                             amount REAL,
+                             category TEXT,
+                             date TEXT,
+                             description TEXT)''')
 
-    def show_categories(self):
-        ''' return a list of all categories'''
-        return self.runQuery("SELECT DISTINCT category from transactions")
+    def add_transaction(self, item_number: str, amount: float, category: str, date: str, description: str) -> None:
+        self.conn.execute(
+            "INSERT INTO transactions (item_number, amount, category, date, description) VALUES (?, ?, ?, ?, ?)",
+            (item_number, amount, category, date, description)
+        )
+        self.conn.commit()
 
-    def add_category(self, category):
-        ''' create a new category '''
-        return self.runQuery("INSERT INTO transactions (category) VALUES (?)", (category,))
+    def delete_transaction(self, item_number: str) -> None:
+        # check if item number exists in the table
+        cursor = self.conn.execute(f"SELECT item_number FROM transactions WHERE item_number = '{item_number}'")
+        result = cursor.fetchone()
+        if not result:
+            print(
+                f"Failed to delete transaction {item_number}. Transaction not found.")
+            return
 
-    def modify_category(self, old_category, new_category):
-        ''' modify an existing category '''
-        return self.runQuery("UPDATE transactions SET category=? WHERE category=?", (new_category, old_category))
+        # delete the transaction if it exists
+        self.conn.execute(
+            f"DELETE FROM transactions WHERE item_number = '{item_number}'")
+        self.conn.commit()
+        print(f"Transaction {item_number} deleted successfully.")
 
-    def show_transactions(self):
-        ''' return all of the transactions as a list of dicts.'''
-        return self.runQuery("SELECT * from transactions")
+    def modify_transaction(self, item_number: str, column_name: str, new_value: str) -> None:
+        self.conn.execute(
+            f"UPDATE transactions SET {column_name} = '{new_value}' WHERE item_number = '{item_number}'")
+        self.conn.commit()
 
-    def add_transaction(self, transaction):
-        ''' create a new transaction and add it to the transactions table '''
-        return self.runQuery("INSERT INTO transactions (amount, category, date, description) VALUES (?, ?, ?, ?)",
-                          (transaction['amount'], transaction['category'], transaction['date'], transaction['description']))
+    def get_transactions(self) -> List[Tuple]:
+        cursor = self.conn.execute("SELECT * FROM transactions")
+        return cursor.fetchall()
 
-    def delete_transaction(self, item_no):
-        ''' delete a transaction '''
-        return self.runQuery("DELETE FROM transactions WHERE item_no=?", (item_no,))
+    def get_categories(self) -> List[str]:
+        cursor = self.conn.execute(
+            "SELECT DISTINCT category FROM transactions")
+        categories = cursor.fetchall()
+        return [category[0] for category in categories]
 
-    def summarize_transactions_by_date(self):
-        ''' summarize transactions by date '''
-        return self.runQuery("SELECT date, SUM(amount) FROM transactions GROUP BY date")
+    def summarize_by_date(self) -> List[Tuple]:
+        cursor = self.conn.execute(
+            "SELECT date, SUM(amount) FROM transactions GROUP BY date")
+        return cursor.fetchall()
 
+    def summarize_by_month(self) -> List[Tuple]:
+        cursor = self.conn.execute(
+            "SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month")
+        return cursor.fetchall()
 
-    def summarize_transactions_by_month(self):
-        ''' summarize transactions by month '''
-        return self.runQuery("SELECT strftime('%Y-%m', date) as month, SUM(amount) FROM transactions GROUP BY month")
+    def summarize_by_year(self) -> List[Tuple]:
+        cursor = self.conn.execute(
+            "SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year")
+        return cursor.fetchall()
 
-    def summarize_transactions_by_year(self):
-        ''' summarize transactions by year '''
-        return self.runQuery("SELECT strftime('%Y', date) as year, SUM(amount) FROM transactions GROUP BY year")
+    def summarize_by_category(self) -> List[Tuple]:
+        cursor = self.conn.execute(
+            "SELECT category, SUM(amount) FROM transactions GROUP BY category")
+        return cursor.fetchall()
 
-    def summarize_transactions_by_category(self):
-        ''' summarize transactions by category '''
-        return self.runQuery("SELECT category, SUM(amount) FROM transactions GROUP BY category")
-
-    def runQuery(self,query,tuple):
-        ''' return all of the uncompleted tasks as a list of dicts.'''
-        con= sqlite3.connect(os.getenv('HOME')+'/tracker.db')
-        cur = con.cursor() 
-        cur.execute(query,tuple)
-        tuples = cur.fetchall()
-        con.commit()
-        con.close()
-        return [toDict(t) for t in tuples]
+    def __del__(self) -> None:
+        self.conn.close()

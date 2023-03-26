@@ -1,6 +1,5 @@
-#! /opt/miniconda3/bin/python3
 '''
-Create a file tracker.py which offers the user the following options and makes calls to the Transaction class to update the database.
+tracker.py offers the user the following options and makes calls to the Transaction class to update the database.
 
 0. quit
 1. show categories
@@ -15,41 +14,8 @@ Create a file tracker.py which offers the user the following options and makes c
 10. summarize transactions by category
 11. print this menu
 
-The tracker.py program should not have any SQL calls and should be similar is structure to the todo2.py program from Lesson19.
-
-todo2.py code for reference:
-todo2 is an app that maintains a todo list
-just as with the todo code in this folder.
-
-but it also uses an Object Relational Mapping (ORM)
-to abstract out the database operations from the
-UI/UX code.
-
-The ORM, TodoList, will map SQL rows with the schema
-    (rowid,title,desc,completed)
-to Python Dictionaries as follows:
-
-(5,'commute','drive to work',false) <-->
-
-{rowid:5,
- title:'commute',
- desc:'drive to work',
- completed:false)
- }
-
-In place of SQL queries, we will have method calls.
-
-This app will store the data in a SQLite database ~/todo.db
-
-Recall that sys.argv is a list of strings capturing the
-command line invocation of this program
-sys.argv[0] is the name of the script invoked from the shell
-sys.argv[1:] is the rest of the arguments (after arg expansion!)
-
-Note the actual implementation of the ORM is hidden and so it 
-could be replaced with PostgreSQL or Pandas or straight python lists
-
 '''
+
 from transaction import Transaction
 
 ''' Initializes the Tracker object and takes in the database file. '''

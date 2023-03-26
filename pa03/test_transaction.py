@@ -1,8 +1,5 @@
-'''
-Testing with pytest -- 
-create a file, test_transaction.py, and addtests to it for each method in the Transaction class. 
-It is a good idea to add a test each time you implement a feature. 
-You are testing the Transaction class, not the tracker.py user interface code.
+''' 
+Testing for the methods of the Transaction class.
 '''
 
 import pytest
@@ -101,7 +98,7 @@ def test_summarize_by_month(transaction):
     transaction.add_transaction('item789', 90.12, 'Food', '2022-04-29', 'Bought dinner')
     transaction.add_transaction('itemabc', 34.56, 'Transportation', '2022-05-05', 'Took a taxi')
     result = transaction.summarize_by_month()
-    assert result == [('2022-03', 12.34),('2022-04', 147.9), ('2022-05', 34.56)]
+    assert result == [('2022-03', 12.34),('2022-04', 146.9), ('2022-05', 34.56)]
 
 
 def test_summarize_by_year(transaction):

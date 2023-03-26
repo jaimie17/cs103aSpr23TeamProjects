@@ -1,28 +1,13 @@
 '''
-Transaction should be similar to the Todolist ORM from Lesson 19 in class. It will allow the user to read and update the database as need.
-The transaction class should not do any printing!! 
-It should have an __init__ method where you pass in the filename for the database to be used (e.g. tracker.db) 
-and each transaction should have the following fields stored in a SQL table called transactions.
-
-'item #',
-'amount',
-'category',
-'date',
-'description'
-
-todolist.py code for reference:
-todolist.py is an Object Relational Mapping to the todolist database
+transaction.py is an Object Relational Mapping to a database
 
 The ORM will work map SQL rows with the schema
-    (rowid,title,desc,completed)
-to Python Dictionaries as follows:
+    (item_number, amount, category, date, description)
+to Python Dictionaries
 
-(5,'commute','drive to work',false) <-->
-{rowid:5,title:'commute',desc:'drive to work',completed:false)
+In place of SQL queries, we have method calls.
 
-In place of SQL queries, we will have method calls.
-
-This app will store the data in a SQLite database ~/todo.db
+This app will store the data in a SQLite database
 
 '''
 from typing import List, Tuple

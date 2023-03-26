@@ -69,6 +69,16 @@ class Transaction:
        print(f"Category {category} added successfully")
        return True
     
+    def modify_category(self, category: str, new_category: str) -> bool:
+        if self.get_category_id(new_category):
+            print("Category already exists")
+            return False
+        self.conn.execute(
+            f"UPDATE categories SET name = '{new_category}' WHERE name = '{category}'")
+        self.conn.commit()
+        print(f"Category {category} modified to {new_category} successfully")
+        return True
+    
     def get_category_id(self, category: str) -> int:
         cursor = self.conn.execute('''CREATE TABLE IF NOT EXISTS categories (id INTEGER PRIMARY KEY, category TEXT)''')
         #ALTER TABLE categories ADD COLUMN name TEXT

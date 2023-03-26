@@ -168,7 +168,7 @@ class Tracker:
             print("No transactions found.")
         else:
             for row in summary:
-                print(row[0], "-", row[1])
+                print(row[0], "- $", row[1])
 
 
     def summarize_by_month(self):

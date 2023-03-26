@@ -61,12 +61,10 @@ class Transaction:
 
     def add_category(self, category: str) -> bool:
        if self.get_category_id(category):
-            print("Category already exists")
             return False
        self.conn.execute(
-            f"INSERT INTO categories (name) VALUES ('{category}')")
+            f"INSERT INTO categories (category) VALUES ('{category}')")
        self.conn.commit()
-       print(f"Category {category} added successfully")
        return True
     
     def modify_category(self, category: str, new_category: str) -> bool:

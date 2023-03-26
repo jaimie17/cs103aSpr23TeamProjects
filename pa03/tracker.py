@@ -190,32 +190,11 @@ class Tracker:
 
 
     def summarize_by_category(self):
-        categories = self.transactions.get_categories()
-        if not categories:
-            print("No categories found.")
-            return
-
-        print("Select a category:")
-        for i, category in enumerate(categories):
-            print(f"{i+1}. {category}")
-
-        while True:
-            try:
-                choice = int(
-                    input("Enter choice (1-{}): ".format(len(categories))))
-                if choice < 1 or choice > len(categories):
-                    raise ValueError
-                break
-            except ValueError:
-                print("Invalid choice. Please enter a number between 1 and {}.".format(
-                    len(categories)))
-
-        summary = self.transactions.summarize_by_category(categories[choice-1])
+        summary = self.transactions.summarize_by_category()
         if not summary:
-            print("No transactions found for category {}.".format(
-                categories[choice-1]))
+            print("No transactions found.")
         else:
-            for month, total in summary.items():
+            for month, total in summary:
                 print(f"{month}: ${total:.2f}")
 
 if __name__ == "__main__":

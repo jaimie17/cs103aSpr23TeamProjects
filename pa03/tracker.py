@@ -168,10 +168,8 @@ class Tracker:
     ''' deletes a transaction from the database '''
     def delete_transaction(self):
         id = input("Enter transaction id: ")
-        if self.transactions.delete_transaction(id):
-            print(f"Deleted transaction {id}.")
-        else:
-            print(f"Failed to delete transaction {id}.")
+        self.transactions.delete_transaction(id)
+        print(f"Deleted transaction {id}.")
     
     ''' will summarize the finance transactions by date'''
     def summarize_by_date(self):

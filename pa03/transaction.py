@@ -50,19 +50,19 @@ class Transaction:
         )
         self.conn.commit()
 
-    def delete_transaction(self, item_number: str) -> None:
+    def delete_transaction(self, id: int) -> None:
         # check if item number exists in the table
-        cursor = self.conn.execute(f"SELECT item_number FROM transactions WHERE item_number = '{item_number}'")
+        cursor = self.conn.execute(f"SELECT item_number FROM transactions WHERE id = '{id}'")
         result = cursor.fetchone()
         if not result:
             print(
-                f"Failed to delete transaction {item_number}. Transaction not found.")
+                f"Failed to delete transaction {id}. Transaction not found.")
             return
         # delete the transaction if it exists
         self.conn.execute(
-            f"DELETE FROM transactions WHERE item_number = '{item_number}'")
+            f"DELETE FROM transactions WHERE id = '{id}'")
         self.conn.commit()
-        print(f"Transaction {item_number} deleted successfully.")
+        print(f"Transaction {id} deleted successfully.")
 
 
     def add_category(self, category: str) -> bool:

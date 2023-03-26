@@ -50,153 +50,168 @@ Note the actual implementation of the ORM is hidden and so it
 could be replaced with PostgreSQL or Pandas or straight python lists
 
 '''
-
 from transaction import Transaction
-import sys
 
-
-# here are some helper functions ...
-
-def print_menu():
-    ''' print an menu of the commands '''
-    print('''Commands:
-            0. quit
-            1. show categories
-            2. add category
-            3. modify category
-            4. show transactions
-            5. add transaction
-            6. delete transaction
-            7. summarize transactions by date
-            8. summarize transactions by month
-            9. summarize transactions by year
-            10. summarize transactions by category
-            11. print this menu
-            '''
-            )
-
-def print_todos(todos):
-    ''' print the todo items '''
-    if len(todos)==0:
-        print('no tasks to print')
-        return
-    print('\n')
-    print("%-10s %-10s %-30s %-10s %-10s"%('item #','amount','category','date','description'))
-    print('-'*40)
-    for item in todos:
-        values = tuple(item.values()) #(rowid,title,desc,completed)
-        print("%-10s %-10s %-30s %2d"%values)
-
-# def process_args(arglist):
-#     ''' examine args and make appropriate calls to TodoList'''
-#     todolist = TodoList()
-#     if arglist==[]:
-#         print_usage()
-#     elif arglist[0]=="show":
-#         print_todos(todolist.selectActive())
-#     elif arglist[0]=="showall":
-#         print_todos(todos = todolist.selectAll())
-#     elif arglist[0]=="showcomplete":
-#         print_todos(todolist.selectCompleted())
-#     elif arglist[0]=='add':
-#         if len(arglist)!=3:
-#             print_usage()
-#         else:
-#             todo = {'title':arglist[1],'desc':arglist[2],'completed':0}
-#             todolist.add(todo)
-#     elif arglist[0]=='complete':
-#         if len(arglist)!= 2:
-#             print_usage()
-#         else:
-#             todolist.setComplete(arglist[1])
-#     elif arglist[0]=='delete':
-#         if len(arglist)!= 2:
-#             print_usage()
-#         else:
-#             todolist.delete(arglist[1])
-#     else:
-#         print(arglist,"is not implemented")
-#         print_usage()
+class Tracker:
+    def __init__(self, db_file):
+        self.db_file = db_file
+        self.transactions = Transaction(db_file)
         
-        
-        
-def process_transaction_args(arglist):
-    ''' examine args and make appropriate calls to TodoList'''
-    transactions = Transaction(db_file)
-    if arglist==[]:
-        print_menu()
-    elif arglist[0]==str(4): #show transactions
-        print_money(transactions.show_transactions())
-
-
-    # elif arglist[0]==str(1): #show categories
-    #     print_money(todos = transactions.show_categories())
-
-    #FROM TO DO LIST     
-    # elif arglist[0]=="showcomplete":
-    #     print_todos(transactions.selectCompleted())
-
-
-    # elif arglist[0]==str(2): #add categories
-    #     if len(arglist)!=3:
-    #         print_menu()
-    #     else:
-    #         todo = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3],'description':0}
-    #         transactions.add_category(todo) #change params
-
-
-    elif arglist[0]==str(5): #add transaction
-        if len(arglist)!=3:
-            print_menu()
-        else:
-            todo = {'amount':arglist[1],'category':arglist[2], 'date':arglist[3],'description':0}
-            transactions.add_transaction(todo) #change params
-
-    #FROM TO DO LIST
-    # elif arglist[0]=='complete':
-    #     if len(arglist)!= 2:
-    #         print_usage()
-    #     else:
-    #         transactions.setComplete(arglist[1])
-
-
-    # elif arglist[0]==str(3): #modify category
-    #     if len(arglist)!= 2:
-    #         print_menu()
-    #     else:
-    #         transactions.modify_category(arglist[1])
-
-
-    elif arglist[0]==str(6): #delete transaction
-        if len(arglist)!= 2:
-            print_menu()
-        else:
-            transactions.delete_transaction(arglist[1])
-    else:
-        print(arglist,"is not implemented")
-        print_menu()
-
-def toplevel():
-    ''' read the command args and process them'''
-    if len(sys.argv)==1:
-        # they didn't pass any arguments, 
-        # so prompt for them in a loop
-        print_menu()
-        args = []
-        while args!=['']:
-            args = input("command> ").split(' ')
-            if args[0]=='5':
-                # join everyting after the name as a string
-                args = ['5',args[1]," ".join(args[2:])]
-            if args[0]=='0':
-                break;
-            process_transaction_args(args)
-            print('-'*40+'\n'*3)
-    else:
-        # read the args and process them
-        args = sys.argv[1:]
-        process_args(args)
-        print('-'*40+'\n'*3)
+    def run(self):
+        print("Welcome to your finance tracker!")
+        self.print_menu()
+        while True:
+            choice = input("\nEnter choice: ")
+            if choice == "0":
+                print("Goodbye!")
+                break
+            elif choice == "1":
+                self.show_categories()
+            elif choice == "2":
+                self.add_category()
+            elif choice == "3":
+                self.modify_category()
+            elif choice == "4":
+                self.show_transactions()
+            elif choice == "5":
+                self.add_transaction()
+            elif choice == "6":
+                self.delete_transaction()
+            elif choice == "7":
+                self.summarize_by_date()
+            elif choice == "8":
+                self.summarize_by_month()
+            elif choice == "9":
+                self.summarize_by_year()
+            elif choice == "10":
+                self.summarize_by_category()
+            elif choice == "11":
+                self.print_menu()
+            else:
+                print("Invalid choice, please try again.")
     
+    def print_menu(self):
+        print("\nPlease choose from the following options:")
+        print("0. Quit")
+        print("1. Show categories")
+        print("2. Add category")
+        print("3. Modify category")
+        print("4. Show transactions")
+        print("5. Add transaction")
+        print("6. Delete transaction")
+        print("7. Summarize transactions by date")
+        print("8. Summarize transactions by month")
+        print("9. Summarize transactions by year")
+        print("10. Summarize transactions by category")
+        print("11. Print this menu")
+    
+    def show_categories(self):
+        categories = self.transactions.get_categories()
+        if not categories:
+            print("No categories found.")
+        else:
+            print("Categories:")
+            for category in categories:
+                print(category)
+    
+    def add_category(self):
+        category = input("Enter new category name: ")
+        if self.transactions.add_category(category):
+            print(f"Added category {category}.")
+        else:
+            print(f"Failed to add category {category}.")
+    
+    def modify_category(self):
+        old_category = input("Enter category to modify: ")
+        new_category = input("Enter new category name: ")
+        if self.transactions.modify_category(old_category, new_category):
+            print(f"Modified category {old_category} to {new_category}.")
+        else:
+            print(f"Failed to modify category {old_category}.")
+    
+    def show_transactions(self):
+        transactions = self.transactions.get_transactions()
+        if not transactions:
+            print("No transactions found.")
+        else:
+            print("Transactions:")
+            for t in transactions:
+                print(t)
+    
+    def add_transaction(self):
+        item = input("Enter item name: ")
+        amount = input("Enter amount: ")
+        category = input("Enter category: ")
+        date = input("Enter date (yyyy-mm-dd): ")
+        description = input("Enter description: ")
+        if self.transactions.add_transaction(item, amount, category, date, description):
+            print("Transaction added successfully.")
+        else:
+            print("Failed to add transaction.")
+    
+    def delete_transaction(self):
+        id = input("Enter transaction id: ")
+        if self.transactions.delete_transaction(id):
+            print(f"Deleted transaction {id}.")
+        else:
+            print(f"Failed to delete transaction {id}.")
+    
+    def summarize_by_date(self):
+        summary = self.transactions.summarize_by_date()
+        if not summary:
+            print("No transactions found.")
+        else:
+            for row in summary:
+                print(row[0], "-", row[1])
 
-toplevel()
+
+    def summarize_by_month(self):
+        summary = self.transactions.summarize_by_month()
+        if not summary:
+            print("No transactions found.")
+        else:
+            for month, total in summary.items():
+                print(f"{month}: ${total:.2f}")
+
+
+    def summarize_by_year(self):
+        summary = self.transactions.summarize_by_year()
+        if not summary:
+            print("No transactions found.")
+        else:
+            for year, total in summary.items():
+                print(f"{year}: ${total:.2f}")
+
+
+    def summarize_by_category(self):
+        categories = self.transactions.get_categories()
+        if not categories:
+            print("No categories found.")
+            return
+
+        print("Select a category:")
+        for i, category in enumerate(categories):
+            print(f"{i+1}. {category}")
+
+        while True:
+            try:
+                choice = int(
+                    input("Enter choice (1-{}): ".format(len(categories))))
+                if choice < 1 or choice > len(categories):
+                    raise ValueError
+                break
+            except ValueError:
+                print("Invalid choice. Please enter a number between 1 and {}.".format(
+                    len(categories)))
+
+        summary = self.transactions.summarize_by_category(categories[choice-1])
+        if not summary:
+            print("No transactions found for category {}.".format(
+                categories[choice-1]))
+        else:
+            for month, total in summary.items():
+                print(f"{month}: ${total:.2f}")
+
+if __name__ == "__main__":
+    tracker = Tracker("trackFinance.db")
+    tracker.run()

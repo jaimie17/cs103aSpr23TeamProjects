@@ -54,16 +54,10 @@ class Transaction:
         # check if item number exists in the table
         cursor = self.conn.execute(f"SELECT item_number FROM transactions WHERE id = '{id}'")
         result = cursor.fetchone()
-        if not result:
-            print(
-                f"Failed to delete transaction {id}. Transaction not found.")
-            return
         # delete the transaction if it exists
         self.conn.execute(
             f"DELETE FROM transactions WHERE id = '{id}'")
         self.conn.commit()
-        print(f"Transaction {id} deleted successfully.")
-
 
     def add_category(self, category: str) -> bool:
        if self.get_category_id(category):

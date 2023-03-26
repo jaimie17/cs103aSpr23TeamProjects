@@ -18,14 +18,16 @@ tracker.py offers the user the following options and makes calls to the Transact
 
 from transaction import Transaction
 
-''' Initializes the Tracker object and takes in the database file. '''
 class Tracker:
     def __init__(self, db_file):
+        ''' Written by Samiya'''
+        ''' Initializes the Tracker object and takes in the database file. '''
         self.db_file = db_file
         self.transactions = Transaction(db_file)
-    
-    ''' Takes in user input of a number to run a finances command. '''   
+       
     def run(self):
+        ''' Written by Samiya'''
+        ''' Takes in user input of a number to run a finances command. '''
         print("Welcome to your finance tracker!")
         self.print_menu()
         while True:
@@ -58,8 +60,9 @@ class Tracker:
             else:
                 print("Invalid choice, please try again.")
                 
-    ''' prints out the menu to perform various finance commands. '''
     def print_menu(self):
+        ''' Written by Samiya'''
+        ''' prints out the menu to perform various finance commands. '''
         print("\nPlease choose from the following options:")
         print("0. Quit")
         print("1. Show categories")
@@ -73,10 +76,10 @@ class Tracker:
         print("9. Summarize transactions by year")
         print("10. Summarize transactions by category")
         print("11. Print this menu")
-    
-    
-    ''' shows the existing categories that the user had inputted. '''
+       
     def show_categories(self):
+        ''' Written by Jaimie'''
+        ''' shows the existing categories that the user had inputted. '''
         categories = self.transactions.get_categories()
         if not categories:
             print("No categories found.")
@@ -84,17 +87,19 @@ class Tracker:
             print("Categories:")
             for category in categories:
                 print(category)
-    
-    ''' adds category to the database ''' 
+     
     def add_category(self):
+        ''' Written by Jaimie'''
+        ''' adds category to the database '''
         category = input("Enter new category name: ")
         if self.transactions.add_category(category):
             print(f"Added category {category}.")
         else:
             print(f"Failed to add category {category}.")
     
-    ''' returns the category the user inputs in if it exists. ''' 
     def get_category(self):
+        ''' Written by Cindy'''
+        ''' returns the category the user inputs in if it exists. '''
         category = input("Enter category name: ")
         if self.transactions.get_category(category):
             print(f"Found category {category}.")
@@ -103,6 +108,7 @@ class Tracker:
     
     
     def modify_category(self):
+        ''' Written by Cindy'''
         ''' modifies the name of an existing category name. '''
         category = input("Enter category to modify: ")
         new_category = input("Enter new category name: ")
@@ -113,8 +119,9 @@ class Tracker:
             print("Failed to modify category")
     
 
-    '''returns a list of transations the user had inputted. '''
     def show_transactions(self):
+        ''' Written by Gianna'''
+        '''returns a list of transations the user had inputted. '''
         transactions = self.transactions.get_transactions()
         if not transactions:
             print("No transactions found.")
@@ -123,8 +130,9 @@ class Tracker:
             for t in transactions:
                 print(t)
     
-    ''' adds a transaction to the database''' 
     def add_transaction(self):
+        ''' Written by Gianna'''
+        ''' adds a transaction to the database'''
         item = input("Enter item name: ")
         amount = input("Enter amount: ")
         category = input("Enter category: ")
@@ -132,16 +140,17 @@ class Tracker:
         description = input("Enter description: ")
         self.transactions.add_transaction(item, amount, category, date, description)
         print("Transaction added successfully.")
-        
-    
-    ''' deletes a transaction from the database '''
+
     def delete_transaction(self):
+        ''' Written by Samiya'''
+        ''' deletes a transaction from the database '''
         id = input("Enter transaction id: ")
         self.transactions.delete_transaction(id)
         print(f"Deleted transaction {id}.")
     
-    ''' will summarize the finance transactions by date'''
     def summarize_by_date(self):
+        ''' Written by Cindy and Samiya'''
+        ''' will summarize the finance transactions by date'''
         summary = self.transactions.summarize_by_date()
         if not summary:
             print("No transactions found.")
@@ -149,8 +158,9 @@ class Tracker:
             for row in summary:
                 print(row[0], "- $", row[1])
 
-    ''' will summarize the finance transactions by month'''
     def summarize_by_month(self):
+        ''' Written by Cindy and Gianna'''
+        ''' will summarize the finance transactions by month'''
         summary = self.transactions.summarize_by_month()
         if not summary:
             print("No transactions found.")
@@ -158,8 +168,9 @@ class Tracker:
             for month, total in summary:
                 print(f"{month}: ${total:.2f}")
 
-    ''' will summarize the finance transactions by year'''
     def summarize_by_year(self):
+        ''' Written by Gianna'''
+        ''' will summarize the finance transactions by year'''
         summary = self.transactions.summarize_by_year()
         if not summary:
             print("No transactions found.")
@@ -167,8 +178,9 @@ class Tracker:
             for year, total in summary:
                 print(f"{year}: ${total:.2f}")
 
-    ''' will summarize the finance transactions by category'''
     def summarize_by_category(self):
+        ''' Written by Gianna'''
+        ''' will summarize the finance transactions by category'''
         summary = self.transactions.summarize_by_category()
         if not summary:
             print("No transactions found.")
@@ -177,6 +189,8 @@ class Tracker:
                 print(f"{month}: ${total:.2f}")
 
 if __name__ == "__main__":
+    ''' Written by Samiya'''
+    ''' will run the main method of the program'''
     tracker = Tracker("finance.db")
     tracker.run()
 

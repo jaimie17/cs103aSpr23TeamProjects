@@ -10,8 +10,7 @@ Many software projects use SQLite to manage their data and this problem set will
 <br>1. Gianna Everette 
 <br>2. Jaimie Louie
 <br>3. Samiyanur Islam
-<br>4. Cindy Chi
-<br/>5. Allison Chanin
+<br/>4. Cindy Chi
 
 ### Script of Running Pylint:
 

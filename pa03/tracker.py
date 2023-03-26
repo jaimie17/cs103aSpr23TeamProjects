@@ -53,10 +53,12 @@ could be replaced with PostgreSQL or Pandas or straight python lists
 from transaction import Transaction
 
 class Tracker:
+    ''' Constructor for Tracker. Will also take in a database file to parse information from. '''
     def __init__(self, db_file):
         self.db_file = db_file
         self.transactions = Transaction(db_file)
-        
+    
+    ''' Will display the menu options at the start and take in user input choice. Depending on the number input, it will process their request. '''
     def run(self):
         print("Welcome to your finance tracker!")
         self.print_menu()
@@ -90,6 +92,7 @@ class Tracker:
             else:
                 print("Invalid choice, please try again.")
     
+    '''will display menu contents'''
     def print_menu(self):
         print("\nPlease choose from the following options:")
         print("0. Quit")
@@ -104,6 +107,7 @@ class Tracker:
         print("9. Summarize transactions by year")
         print("10. Summarize transactions by category")
         print("11. Print this menu")
+    
     
     def show_categories(self):
         categories = self.transactions.get_categories()

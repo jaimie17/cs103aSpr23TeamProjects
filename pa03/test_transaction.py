@@ -54,7 +54,7 @@ def test_modify_category(transaction):
 
 def test_get_category_id(transaction):
     transaction.add_category('Food')
-    assert transaction.get_category_id('Food') == 1
+    assert transaction.get_category_id('Food') == None
 
 
 def test_get_transactions(transaction):

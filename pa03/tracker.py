@@ -101,9 +101,9 @@ class Tracker:
         else:
             print(f"Failed to find category {category}.")
     
-    ''' modifies the name of an existing category name. '''
-
+    
     def modify_category(self):
+        ''' modifies the name of an existing category name. '''
         category = input("Enter category to modify: ")
         new_category = input("Enter new category name: ")
         if self.transactions.modify_category(category, new_category):

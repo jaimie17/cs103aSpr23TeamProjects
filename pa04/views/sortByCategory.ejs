@@ -22,7 +22,7 @@
         </tr>
     </thead>
     <tbody>
-        <% items.sort((a,b) => (a.category > b.category) ? 1 : ((b.category > a.category) ? -1 : 0)).forEach((item) => { %>
+        <% items.sort((a, b) => a.category.localeCompare(b.category)).forEach((item) => { ... } => { %>
         <tr>
                <td> <%= item.description %> </td>
                <td> <%= item.amount %> </td>

@@ -8,7 +8,7 @@
 <br>3. Samiyanur Islam
 <br>4. Cindy Chi
 <br/>5. Allison Chanin
-
+<img width="858" alt="CA01" src="https://user-images.githubusercontent.com/76130563/231356058-47424496-ef20-454e-8465-1ccbd452677f.png">
 
 ## CA01
 We are creating a web app using Flask which uses prompt engineering to generate useful responses to specific user queries.
@@ -24,3 +24,11 @@ Finance Tracker - using SQL, pytest, and pylint
 
 #### Motivation
 Many software projects use SQLite to manage their data and this problem set will give you the experience of building such an app.  Another important process in software engineering is the design of automated tests.  This assignment will ask you to develop a suite of tests for your app. There are other database and testing frameworks, but they are all similar in principle and this assignment will expose you to the core concepts and skills you'll need.
+
+## PA04
+Transaction App in Express/Mongoose
+
+#### Motivation
+We are recreating the PA03 app as an Express App using Mongodb (through Mongoose) as the database. It has the main transactions list page that essentially shows all of our transactions and allows us to add, delete, edit transactions and to sort by any column and to group by the category column. We can select the "Sort by" button to get desired information simply by adding a query parameter. Then we have "Group By Category". Hitting the "group by category" link sends us to a page with a simple table with two columns: one for the category and the other for the sum of the amounts for transactions in that category.
+
+

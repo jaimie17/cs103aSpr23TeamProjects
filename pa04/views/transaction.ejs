@@ -28,46 +28,34 @@
           </tr>
         </thead>
 
-
-        <tbody>
-          <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <th scope="col"> <i class="bi bi-trash-fill"></i></th>
-            <td><i class="bi bi-brush"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-            <th scope="col"> <i class="bi bi-trash-fill"></i></th>
-            <td><i class="bi bi-brush"></i></td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            <td>@twitter</td>
-            <th scope="col"> <i class="bi bi-trash-fill"></i></th> 
-            <td><i class="bi bi-brush"></i></td>
-          </tr>
+         <tbody>
+            <% items.forEach(item => {%>
+                <tr>
+                   <td> <%= item.description %> </td>
+                   <td> <%= item.amount %> </td>
+                   <td> <%= item.category %> </td>
+                   <td> <%= item.date %> </td>
+                   <th scope="col"> <i class="bi bi-trash-fill"></i></th>
+                   <td><i class="bi bi-brush"></i></td>
+                </tr>
+               
+                <% }) %>
         </tbody>
+        
       </table>
     </div>
   </div>
 
-
 <h2> Add a New Transaction </h1>
   <div>
     <form method="post" action="transaction">
-        <input type="text" placeholder="description">
+        <input type="text" name="description" placeholder="description">
         <br>
-        <input type="text" placeholder="category">
+        <input type="text" name="category" placeholder="category">
         <br>
-        <input type="int" placeholder="amount">
+        <input type="int" name="amount" placeholder="amount">
         <br>
-        <input type="date" placeholder="mm/dd/yyyy">
+        <input type="date" name="date" placeholder="mm/dd/yyyy">
         <br>
         <input type="submit" value="store">
     </form>

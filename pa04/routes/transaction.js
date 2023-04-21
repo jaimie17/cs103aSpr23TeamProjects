@@ -52,7 +52,7 @@ router.post('/transaction',
         {description:req.body.description,
          category:req.body.category,
          amount: req.body.amount,
-         date: new Date(),
+         date: req.body.date,
          userId: req.user._id
         })
       await transaction.save();

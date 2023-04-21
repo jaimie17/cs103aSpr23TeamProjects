@@ -41,7 +41,7 @@ router.get('/transaction/',
       //                   .sort({createdAt:1})
 
       // }
-            res.render('transaction',{description,category,amount,date});
+             res.render('transaction',{items});
 });
 
 

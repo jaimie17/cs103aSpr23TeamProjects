@@ -22,7 +22,7 @@ isLoggedIn = (req,res,next) => {
 }
 
 // get the value associated to the key
-router.get('/todo/',
+router.get('/transaction/',
   isLoggedIn,
   async (req, res, next) => {
       const show = req.query.show

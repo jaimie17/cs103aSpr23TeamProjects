@@ -46,18 +46,18 @@ router.get('/transaction/',
 
 
 /* add the value in the body to the list associated to the key */
-router.post('/todo',
+router.post('/transaction',
   isLoggedIn,
   async (req, res, next) => {
       const todo = new ToDoItem(
-        {item:req.body.item,
-         createdAt: new Date(),
-         completed: false,
-         priority: parseInt(req.body.priority),
+        {description:req.body.description,
+         category:req.body.category,
+         date: new Date(),
+         amount: parseInt(req.body.amount),
          userId: req.user._id
         })
       await todo.save();
-      res.redirect('/todo')
+      res.redirect('/transaction')
 });
 
 router.get('/todo/remove/:itemId',

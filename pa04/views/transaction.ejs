@@ -54,12 +54,14 @@
 
 <h2> Add a New Transaction </h1>
   <div>
-    <ul class="list-group">
-
-
-
-
-    </ul>
-
-
-  </div>
+    <form method="post" action="transaction">
+        <input type="text" placeholder="description">
+        <br>
+        <input type="text" placeholder="category">
+        <br>
+        <input type="int" placeholder="amount">
+        <br>
+        <input type="date" placeholder="mm/dd/yyyy">
+        <br>
+        <input type="submit" value="store">
+    </form>

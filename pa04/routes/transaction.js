@@ -25,20 +25,23 @@ isLoggedIn = (req,res,next) => {
 router.get('/transaction/',
   isLoggedIn,
   async (req, res, next) => {
-      const show = req.query.show
-      const completed = show=='completed'
+      //const show = req.query.show
+      const description = req.query.description
+      const category = req.query.category
+      const amount = req.query.amount
+      const date = req.query.date
       let items=[]
-      if (show) { // show is completed or todo, so just show some items
-        items = 
-          await ToDoItem.find({userId:req.user._id, completed})
-                        .sort({completed:1,priority:1,createdAt:1})
-      }else {  // show is null, so show all of the items
-        items = 
-          await ToDoItem.find({userId:req.user._id})
-                        .sort({completed:1,priority:1,createdAt:1})
+      // if (show) { // show is completed or todo, so just show some items
+      //   items = 
+      //     await ToDoItem.find({userId:req.user._id})
+      //                   .sort({createdAt:1})
+      // }else {  // show is null, so show all of the items
+      //   items = 
+      //     await ToDoItem.find({userId:req.user._id})
+      //                   .sort({createdAt:1})
 
-      }
-            res.render('toDoList',{items,show,completed});
+      // }
+            res.render('transaction',{description,category,amount,date});
 });
 
 

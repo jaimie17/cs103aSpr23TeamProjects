@@ -36,8 +36,8 @@ router.get('/transaction/',
       //     await ToDoItem.find({userId:req.user._id})
       //                   .sort({createdAt:1})
       // }else {  // show is null, so show all of the items
-      //   items = 
-      //     await ToDoItem.find({userId:req.user._id})
+         items = 
+           await Transaction.find({userId:req.user._id})
       //                   .sort({createdAt:1})
 
       // }

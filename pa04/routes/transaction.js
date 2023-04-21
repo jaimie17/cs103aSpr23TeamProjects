@@ -3,7 +3,7 @@
 */
 const express = require('express');
 const router = express.Router();
-const ToDoItem = require('../models/ToDoItem')
+const Transaction = require('../models/Transaction')
 const User = require('../models/User')
 
 
@@ -49,16 +49,17 @@ router.get('/transaction/',
 router.post('/transaction',
   isLoggedIn,
   async (req, res, next) => {
-      const todo = new ToDoItem(
+      const transaction = new Transaction(
         {description:req.body.description,
          category:req.body.category,
+         amount: req.body.amount,
          date: new Date(),
-         amount: parseInt(req.body.amount),
          userId: req.user._id
         })
-      await todo.save();
+      await transaction.save();
       res.redirect('/transaction')
 });
+
 
 router.get('/todo/remove/:itemId',
   isLoggedIn,

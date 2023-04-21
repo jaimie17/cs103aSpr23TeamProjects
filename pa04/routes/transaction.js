@@ -52,7 +52,7 @@ router.post('/transaction',
         {description:req.body.description,
          category:req.body.category,
          amount: req.body.amount,
-         date: new Date(),
+         date: req.body.date,
          userId: req.user._id
         })
       await transaction.save();
@@ -68,27 +68,32 @@ router.get('/transaction/remove/:itemId',
       res.redirect('/transaction')
 });
 
-router.get('/todo/edit/:itemId',
+router.get('/transaction/edit/:itemId',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /todo/edit/:itemId")
+      console.log("inside /transaction/edit/:itemId")
       const item = 
-       await ToDoItem.findById(req.params.itemId);
+       await Transaction.findById(req.params.itemId);
       //res.render('edit', { item });
       res.locals.item = item
-      res.render('edit')
+      res.render('edit_transaction')
       //res.json(item)
 });
 
-router.post('/todo/updateTodoItem',
+router.post('/transaction/update/',
   isLoggedIn,
   async (req, res, next) => {
-      const {itemId,item,priority} = req.body;
-      console.log("inside /todo/complete/:itemId");
-      await ToDoItem.findOneAndUpdate(
-        {_id:itemId},
-        {$set: {item,priority}} );
-      res.redirect('/toDo')
+      const {itemId,item} = req.body;
+      console.log("inside /transaction/edit/:itemId");
+      const updated = {
+        description:req.body.description,
+        category:req.body.category,
+        amount:req.body.amount,
+        date:req.body.date
+      };
+      
+      await Transaction.findOneAndUpdate({_id: itemId}, {$set: {updated}});
+      res.redirect('/transaction')
 });
 
 router.get('/todo/byUser',

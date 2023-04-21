@@ -34,7 +34,7 @@
                    <td> <%= item.description %> </td>
                    <td> <%= item.amount %> </td>
                    <td> <%= item.category %> </td>
-                   <td> <%= item.date %> </td>
+                   <td> <%= item.date.toLocaleDateString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'}) %> </td>
                    <td>
                     <a href="/transaction/remove/<%=item._id %>">
                       <i class="bi bi-trash"></i>
@@ -59,7 +59,7 @@
         <br>
         <input type="int" name="amount" placeholder="amount">
         <br>
-        <input type="date" name="date" placeholder="mm/dd/yyyy">
+        <input type="text" name="date" placeholder="mm/dd/yyyy">
         <br>
         <input type="submit" value="store">
     </form>

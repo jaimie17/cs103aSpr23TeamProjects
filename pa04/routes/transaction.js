@@ -25,22 +25,21 @@ isLoggedIn = (req,res,next) => {
 router.get('/transaction/',
   isLoggedIn,
   async (req, res, next) => {
-      //const show = req.query.show
-      const description = req.query.description
-      const category = req.query.category
-      const amount = req.query.amount
-      const date = req.query.date
+      const id = req.query.id;
+      // const description = req.query.description
+      // const category = req.query.category
+      // const amount = req.query.amount
+      // const date = req.query.date
       let items=[]
-      // if (show) { // show is completed or todo, so just show some items
-      //   items = 
-      //     await ToDoItem.find({userId:req.user._id})
-      //                   .sort({createdAt:1})
-      // }else {  // show is null, so show all of the items
+      if (id) { // if ID is present, delete the corresponding transaction and show all the remaining ones
+        await Transaction.deleteOne({_id: id, userId: req.user._id}); // delete the transaction from the database
+        items = await Transaction.find({userId:req.user._id}); // fetch all the remaining transactions
+      } else {
          items = 
            await Transaction.find({userId:req.user._id})
       //                   .sort({createdAt:1})
 
-      // }
+      }
              res.render('transaction',{items});
 });
 
@@ -61,32 +60,12 @@ router.post('/transaction',
 });
 
 
-router.get('/todo/remove/:itemId',
+router.get('/transaction/remove/:itemId',
   isLoggedIn,
   async (req, res, next) => {
-      console.log("inside /todo/remove/:itemId")
-      await ToDoItem.deleteOne({_id:req.params.itemId});
-      res.redirect('/toDo')
-});
-
-router.get('/todo/complete/:itemId',
-  isLoggedIn,
-  async (req, res, next) => {
-      console.log("inside /todo/complete/:itemId")
-      await ToDoItem.findOneAndUpdate(
-        {_id:req.params.itemId},
-        {$set: {completed:true}} );
-      res.redirect('/toDo')
-});
-
-router.get('/todo/uncomplete/:itemId',
-  isLoggedIn,
-  async (req, res, next) => {
-      console.log("inside /todo/complete/:itemId")
-      await ToDoItem.findOneAndUpdate(
-        {_id:req.params.itemId},
-        {$set: {completed:false}} );
-      res.redirect('/toDo')
+      console.log("inside /transaction/remove/:itemId")
+      await Transaction.deleteOne({_id: req.params.itemId, _id:req.params.itemId});
+      res.redirect('/transaction')
 });
 
 router.get('/todo/edit/:itemId',

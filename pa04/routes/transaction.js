@@ -83,16 +83,16 @@ router.get('/transaction/edit/:itemId',
 router.post('/transaction/update/',
   isLoggedIn,
   async (req, res, next) => {
-      const {itemId,item} = req.body;
+      const {itemId} = req.body;
       console.log("inside /transaction/edit/:itemId");
-      const updated = {
+      const item = {
         description:req.body.description,
         category:req.body.category,
         amount:req.body.amount,
         date:req.body.date
       };
       
-      await Transaction.findOneAndUpdate({_id: itemId}, {$set: {updated}});
+      await Transaction.findOneAndUpdate({_id: itemId}, item);
       res.redirect('/transaction')
 });
 

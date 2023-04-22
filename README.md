@@ -1,9 +1,6 @@
 # cs103aSpr23TeamProjects
 
 # CS103a Spring 2023 group project:
-<img width="334" alt="Screen Shot 2023-04-22 at 6 29 13 PM" src="https://user-images.githubusercontent.com/76130563/233810462-5498702f-8c44-40d4-a965-61654c6c4707.png">
-
-<img width="858" alt="CA01" src="https://user-images.githubusercontent.com/76130563/231356058-47424496-ef20-454e-8465-1ccbd452677f.png">
 
 ## CA01
 We are creating a web app using Flask which uses prompt engineering to generate useful responses to specific user queries.
@@ -13,6 +10,9 @@ Gpt-based webapps using prompt engineering have already started to appear and th
 
 #### Theme: "Text Generation and Analysis". 
 The methods used in the GPT class generates text in various formats (summaries, translations, paraphrases, poems, articles, captions, etc.) and perform analysis on text (sentiment analysis).  
+
+<img width="858" alt="CA01" src="https://user-images.githubusercontent.com/76130563/231356058-47424496-ef20-454e-8465-1ccbd452677f.png">
+<img width="334" alt="Screen Shot 2023-04-22 at 6 29 13 PM" src="https://user-images.githubusercontent.com/76130563/233810462-5498702f-8c44-40d4-a965-61654c6c4707.png">
 
 ## PA03
 Finance Tracker - using SQL, pytest, and pylint

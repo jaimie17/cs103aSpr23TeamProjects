@@ -96,26 +96,24 @@ router.post('/transaction/update/',
       res.redirect('/transaction')
 });
 
-router.get('/todo/byUser',
+router.get('/transaction/groupByCategory',
   isLoggedIn,
   async (req, res, next) => {
-      let results =
-            await ToDoItem.aggregate(
+      let categories =
+            await Transaction.aggregate(
                 [ 
-                  {$group:{
-                    _id:'$userId',
-                    total:{$count:{}}
-                    }},
-                  {$sort:{total:-1}},              
-                ])
-              
-        results = 
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
+                 
+                   { 
+                     $group: {
+                      _id: '$category',
+                      total: { $sum:'$amount' }
+                    }
+                  }         
+                ]);
+       
 
         //res.json(results)
-        res.render('summarizeByUser',{results})
+        res.render('groupByCategory', {categories})
 });
 
 

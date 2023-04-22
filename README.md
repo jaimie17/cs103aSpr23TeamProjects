@@ -1,13 +1,8 @@
 # cs103aSpr23TeamProjects
 
 # CS103a Spring 2023 group project:
+<img width="334" alt="Screen Shot 2023-04-22 at 6 29 13 PM" src="https://user-images.githubusercontent.com/76130563/233810462-5498702f-8c44-40d4-a965-61654c6c4707.png">
 
-### Team Members: 
-<br>1. Gianna Everette 
-<br>2. Jaimie Louie
-<br>3. Samiyanur Islam
-<br>4. Cindy Chi
-<br/>5. Allison Chanin
 <img width="858" alt="CA01" src="https://user-images.githubusercontent.com/76130563/231356058-47424496-ef20-454e-8465-1ccbd452677f.png">
 
 ## CA01
@@ -30,5 +25,8 @@ Transaction App in Express/Mongoose
 
 #### Motivation
 We are recreating the PA03 app as an Express App using Mongodb (through Mongoose) as the database. It has the main transactions list page that essentially shows all of our transactions and allows us to add, delete, edit transactions and to sort by any column and to group by the category column. We can select the "Sort by" button to get desired information simply by adding a query parameter. Then we have "Group By Category". Hitting the "group by category" link sends us to a page with a simple table with two columns: one for the category and the other for the sum of the amounts for transactions in that category.
+<img width="1359" alt="Screen Shot 2023-04-22 at 6 27 50 PM" src="https://user-images.githubusercontent.com/76130563/233810432-e59e91e5-3120-40f9-9060-b471431276aa.png">
+<img width="1338" alt="Screen Shot 2023-04-22 at 6 29 42 PM" src="https://user-images.githubusercontent.com/76130563/233810479-e05f075e-bd99-4fb5-9192-3e1558d6eeb5.png"><img width="1059" alt="Screen Shot 2023-04-22 at 6 31 33 PM" src="https://user-images.githubusercontent.com/76130563/233810483-12065591-9129-4513-9b3b-d12648d6eafd.png">
+
 
 

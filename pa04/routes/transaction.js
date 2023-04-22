@@ -2,6 +2,7 @@
   transaction.js -- Router for the Transactions
 */
 const express = require('express');
+const mongoose = require( 'mongoose' );
 const router = express.Router();
 const Transaction = require('../models/Transaction')
 const User = require('../models/User')
@@ -99,10 +100,15 @@ router.post('/transaction/update/',
 router.get('/transaction/groupByCategory',
   isLoggedIn,
   async (req, res, next) => {
+      const userId = req.user._id;
       let categories =
             await Transaction.aggregate(
                 [ 
-                 
+                  { 
+                    $match: {
+                      userId: new mongoose.Types.ObjectId(userId)
+                   }
+                 },
                    { 
                      $group: {
                       _id: '$category',
@@ -110,12 +116,8 @@ router.get('/transaction/groupByCategory',
                     }
                   }         
                 ]);
-       
-
-        //res.json(results)
+  
         res.render('groupByCategory', {categories})
 });
-
-
 
 module.exports = router;

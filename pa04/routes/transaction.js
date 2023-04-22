@@ -2,6 +2,7 @@
   transaction.js -- Router for the Transactions
 */
 const express = require('express');
+const mongoose = require( 'mongoose' );
 const router = express.Router();
 const Transaction = require('../models/Transaction')
 const User = require('../models/User')
@@ -25,23 +26,28 @@ isLoggedIn = (req,res,next) => {
 router.get('/transaction/',
   isLoggedIn,
   async (req, res, next) => {
-      const id = req.query.id;
-      // const description = req.query.description
-      // const category = req.query.category
-      // const amount = req.query.amount
-      // const date = req.query.date
-      let items=[]
-      if (id) { // if ID is present, delete the corresponding transaction and show all the remaining ones
-        await Transaction.deleteOne({_id: id, userId: req.user._id}); // delete the transaction from the database
-        items = await Transaction.find({userId:req.user._id}); // fetch all the remaining transactions
-      } else {
-         items = 
-           await Transaction.find({userId:req.user._id})
-      //                   .sort({createdAt:1})
+    const id = req.query.id;
+    const sortBy = req.query.sortBy;
 
-      }
-             res.render('transaction',{items});
-});
+    let items = []
+    if (id) { // if ID is present, delete the corresponding transaction and show all the remaining ones
+      await Transaction.deleteOne({ _id: id, userId: req.user._id }); // delete the transaction from the database
+      items = await Transaction.find({ userId: req.user._id }); // fetch all the remaining transactions
+    } else if (sortBy == 'category') {
+      items = await Transaction.find({ userId: req.user._id }).sort({ category: 1 });
+    } else if (sortBy == 'amount') {
+      items = await Transaction.find({ userId: req.user._id }).sort({ amount: 1 });
+    } else if (sortBy == 'description') {
+      items = await Transaction.find({ userId: req.user._id }).sort({ description: 1 });
+    } else if (sortBy == 'date') {
+      items = await Transaction.find({ userId: req.user._id }).sort({ date: 1 });
+    } else {
+      items = await Transaction.find({ userId: req.user._id })
+    }
+
+    res.render('transaction', { items });
+  });
+
 
 
 /* add the value in the body to the list associated to the key */
@@ -96,28 +102,27 @@ router.post('/transaction/update/',
       res.redirect('/transaction')
 });
 
-router.get('/todo/byUser',
+router.get('/transaction/groupByCategory',
   isLoggedIn,
   async (req, res, next) => {
-      let results =
-            await ToDoItem.aggregate(
+      const userId = req.user._id;
+      let categories =
+            await Transaction.aggregate(
                 [ 
-                  {$group:{
-                    _id:'$userId',
-                    total:{$count:{}}
-                    }},
-                  {$sort:{total:-1}},              
-                ])
-              
-        results = 
-           await User.populate(results,
-                   {path:'_id',
-                   select:['username','age']})
-
-        //res.json(results)
-        res.render('summarizeByUser',{results})
+                  { 
+                    $match: {
+                      userId: new mongoose.Types.ObjectId(userId)
+                   }
+                 },
+                   { 
+                     $group: {
+                      _id: '$category',
+                      total: { $sum:'$amount' }
+                    }
+                  }         
+                ]);
+  
+        res.render('groupByCategory', {categories})
 });
-
-
 
 module.exports = router;

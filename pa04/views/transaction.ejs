@@ -1,24 +1,26 @@
+<br>
+<br>
 <h1> Transactions for <%= user.username %> </h1>
 
 
   <div class="row">
     <div class="col">
       <p> Here is your list of transactions! </p>
-      <a class="btn btn-primary"
-              href="?groupBy=category">Group by category</a>
-      <a class="btn btn-primary"
+      <a class="btn btn-danger"
+              href="/transaction/groupByCategory">Group by category</a>
+      <a class="btn btn-danger"
               href="?sortBy=category">Sort by category</a>
-      <a class="btn btn-primary"
+      <a class="btn btn-danger"
               href="?sortBy=amount">Sort by amount</a>
-      <a class="btn btn-primary"
+      <a class="btn btn-danger"
               href="?sortBy=description">Sort by description</a>
-      <a class="btn btn-primary"
+      <a class="btn btn-danger"
               href="?sortBy=date">Sort by date</a>
 
 
-      <table class="table table-striped table-bordered">
+      <table style="background-color:#ffffff;" class="table table-striped table-bordered">
         <thead>
-          <tr>
+          <tr style="background-color:#451b65;color:#ffffff;">
             <th scope="col">Description</th>
             <th scope="col">Amount</th>
             <th scope="col">Category</th>
@@ -69,4 +71,5 @@
         <input type="submit" value="store">
     </form>
   </div>
+
 

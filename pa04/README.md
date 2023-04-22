@@ -2,6 +2,8 @@
 
 We are recreating PA03 app as an Express App using Mongodb (through Mongoose) as the database. This app has an home, about, to do list, transaction and a logout page. 
 
+<img width="1359" alt="Screen Shot 2023-04-22 at 6 27 50 PM" src="https://user-images.githubusercontent.com/76130563/233810612-ebd74c45-72c6-4bea-a568-2f24ae793a4d.png">
+
 ### Teammates:
  1. Samiya
  2. Jaimie
@@ -25,3 +27,5 @@ and returns to the same page except the category column. Similarly with the othe
 #### Group By Category
 Hitting the "group by category" link sends you to a page with a simple table with two columns: one for the category and the other for the sum of the amounts for transactions in that category.
 
+<img width="1338" alt="Screen Shot 2023-04-22 at 6 29 42 PM" src="https://user-images.githubusercontent.com/76130563/233810597-d45d377b-97de-4548-827c-4ed1e5779e92.png">
+<img width="1059" alt="Screen Shot 2023-04-22 at 6 31 33 PM" src="https://user-images.githubusercontent.com/76130563/233810604-ac122a00-85e0-4036-a555-68859b4564dc.png">

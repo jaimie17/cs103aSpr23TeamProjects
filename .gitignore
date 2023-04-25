@@ -130,6 +130,5 @@ dmypy.json
 
 # JSON/Express
 node_modules
-package.json
 package-lock.json
 ```

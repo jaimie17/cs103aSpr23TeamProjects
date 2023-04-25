@@ -12,4 +12,4 @@ var toDoItemSchema = Schema( {
   userId: {type:ObjectId, ref:'user' }
 } );
 
-module.exports = mongoose.model( 'ToDoItem', toDoItemSchema );
+module.exports = mongoose.model( 'ToDoItemGroup21', toDoItemSchema );

@@ -4,7 +4,7 @@
 const express = require('express');
 const mongoose = require( 'mongoose' );
 const router = express.Router();
-const Transaction = require('../models/Transaction')
+const Transaction = require('../models/TransactionGroup21')
 const User = require('../models/User')
 
 

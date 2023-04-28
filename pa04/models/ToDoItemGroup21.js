@@ -4,12 +4,12 @@ const mongoose = require( 'mongoose' );
 const Schema = mongoose.Schema;
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
-var transactionSchema = Schema( {
-  description: String,
-  amount: Number,
-  category: String,
-  date: Date,
+var toDoItemSchema = Schema( {
+  item: String,
+  completed: Boolean,
+  createdAt: Date,
+  priority: Number,
   userId: {type:ObjectId, ref:'user' }
 } );
 
-module.exports = mongoose.model( 'Transaction', transactionSchema );
+module.exports = mongoose.model( 'ToDoItemGroup21', toDoItemSchema );

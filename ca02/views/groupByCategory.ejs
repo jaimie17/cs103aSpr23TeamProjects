@@ -1,0 +1,30 @@
+<br>
+<br>
+<head>
+	<title>Transactions Grouped by Category</title>
+	<link rel="stylesheet" type="text/css" href="/stylesheets/style.css">
+</head>
+<body>
+	<h1>Transactions Grouped by Category</h1>
+
+	<table style="background-color:#ffffff;" class="table table-bordered table-striped">
+	    <thead>
+	        <tr>
+	            <th>Category</th>
+	            <th>Total Amount</th>
+	        </tr>
+	    </thead>
+	    <tbody>
+	        <% categories.forEach((category) => { %>
+	        <tr>
+	               <td> <%= category._id %> </td>
+	               <td> <%= category.total %> </td>
+	            </tr>
+	            
+	            <% }); %>
+	    </tbody>
+	</table>
+
+	<br>
+	<a href="/transaction">Back to Transactions</a>
+</body>

@@ -1,24 +1,15 @@
-<!DOCTYPE html>
-<html>
-
 <head>
     <title>GPT Spanish Translator</title>
 </head>
 
 <body>
     <h1>GPT Spanish Translator</h1>
-    <form action="/translate" method="POST">
+    <form action="/gpt" method="POST">
         <label for="text">Enter text to translate:</label><br>
         <textarea id="text" name="text"></textarea><br>
         <br>
         <input type="submit" value="Translate">
     </form>
-    <% if(translation) { %>
-        <h2>Translation:</h2>
-        <p>
-            <%= translation %>
-        </p>
-        <% } %>
+    
 </body>
 
-</html>

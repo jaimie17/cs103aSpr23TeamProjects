@@ -1,72 +1,61 @@
-/*
-  gpt.js -- Router accessing GPT API
-*/
-
-// load the modules
+// Import required libraries
 const express = require("express");
+const path = require("path");
+const { GPT } = require("openai");
+require("dotenv").config();
+
+// Initialize the app and OpenAI's GPT API
 const app = express();
-app.use(express.json());
-const router = express.Router();
-const axios = require('axios')
-import { Configuration, OpenAIApi } from "openai";
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY,
+const gptAPI = new GPT(process.env.APIKEY);
+
+// Set the views directory and view engine
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "pug");
+
+// Define a route for the home page
+app.get("/", (req, res) => {
+  console.log("processing / route");
+  res.render("home");
 });
-const openai = new OpenAIApi(configuration);
-const response = await openai.listEngines();
 
+// Define a route for the team pages
+app.get("/index", (req, res) => {
+  console.log("processing /index route");
+  res.render("team");
+});
 
-router.get('/gpt', (req,res,next) => {
-    res.render('gpt')
-})
+// Define a route for the about page
+app.get("/about", (req, res) => {
+  console.log("processing /about route");
+  res.render("about");
+});
 
-// returns a list of matches for an address
-// if there is a match the latlon is in the coordinates field
-const get_latlon = async (address) => {
-    address = encodeURI(address);
-    let url="https://api.openai.com/v1/chat/completions"+
-              "/locations/onelineaddress"+
-              "?address="+address+
-              "&benchmark=2020"+
-              "&format=json"
-    let response = await axios.get(url)
-    return response.data.result.addressMatches
-}
+// Define a route for the GPT demo page
+app.get("/gptdemo", (req, res) => {
+  console.log("processing /gptdemo route");
+  res.render("gptdemo");
+});
 
-// returns a forecast for any US location
-// given by lattitude and longitude
-const get_forecastURL = async (latlon) => {
-  let url = "https://api.weather.gov/points/"+
-              latlon.y+","+latlon.x
-  const response = await axios.get(url)
-  return response.data.properties.forecast
-}
+// Define a route to handle form submissions
+app.post("/gptdemo", async (req, res) => {
+  console.log("processing form submission");
 
-const get_weather = async (address) => {
-  const matches = await get_latlon(address)
-  if (matches.length==0) {
-    return ([])
-  } else {
-    const url = await get_forecastURL(matches[0].coordinates)
-    const response = await axios.get(url)
-    return (response.data.properties.periods)
-  }
-}
+  // Get the prompt from the form data
+  const prompt = req.body.prompt;
 
-router.post('/weather.json',
-  async (req,res,next) => {
-    const weather = await get_weather(req.body.address)
-    res.json(weather)
-  }
-)
+  // Send the prompt to OpenAI's GPT API to get a response
+  const response = await gptAPI.complete({
+    prompt,
+    maxTokens: 150,
+    n: 1,
+    stop: "\n",
+  });
 
-router.post('/weather',
-  async (req,res,next) => {
-    console.log('getting weather')
-    res.locals.address = req.body.address
-    res.locals.weather = await get_weather(req.body.address)
-    res.render('weatherForecast')
-}
-)
+  // Render the response on the page
+  res.render("gptdemo", { response: response.choices[0].text });
+});
 
-  module.exports = router;
+// Start the server
+app.listen(3000, () => {
+  console.log("Server listening on port 3000");
+});

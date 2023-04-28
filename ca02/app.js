@@ -7,6 +7,7 @@ const layouts = require("express-ejs-layouts");
 const pw_auth_router = require('./routes/pwauth')
 const toDoRouter = require('./routes/todo');
 const transactionRouter = require('./routes/transaction');
+const gptRouter = require('./routes/gpt');
 
 const User = require('./models/User');
 
@@ -88,9 +89,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
-
-
 app.use(pw_auth_router)
 
 app.use(layouts);
@@ -136,6 +134,7 @@ app.get('/home',
 
 app.use(toDoRouter);
 app.use(transactionRouter);
+app.use(gptRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

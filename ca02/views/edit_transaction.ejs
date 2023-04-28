@@ -1,0 +1,23 @@
+
+<form method="post" action="/transaction/update">
+    <input type="hidden" name="itemId" value="<%= item._id %>">
+
+    new description: 
+    <input type="text" 
+           value = <%= item.description %>
+           name="description"><br>
+    new amount: 
+    <input type="text" 
+       value = <%= item.amount %>
+           name="amount"><br>
+    new category: 
+    <input type="text" 
+           value = <%= item.category %>
+           name="category"><br>
+    new date: 
+    <input type="text" 
+           value = "<%= item.date.toLocaleString('en-US', {weekday: 'long', month: 'long', day: 'numeric', year: 'numeric'}) %>"
+           name="date"><br>
+    <br>
+    <input type="submit" value="store">
+</form>

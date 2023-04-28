@@ -32,6 +32,65 @@ app.post("/gptdemo", async (req, res) => {
     n: 1,
     stop: "\n",
   });
+  // Define a route for the poem page
+  app.get("/poem", (req, res) => {
+    console.log("processing /poem route");
+    res.render("poem");
+  });
+
+  // Define a route to handle poem form submissions
+  app.post("/poem", async (req, res) => {
+    console.log("processing poem form submission");
+
+    // Get the prompt from the form data
+    const prompt = req.body.prompt;
+
+    // Generate a poem based on the prompt using the GPT API
+    const poem = await gptAPI.generatePoem(prompt);
+
+    // Render the poem on the page
+    res.render("poem", { poem });
+  });
+
+  // Define a route for the summaries page
+  app.get("/summaries", (req, res) => {
+    console.log("processing /summaries route");
+    res.render("summaries");
+  });
+
+  // Define a route to handle summaries form submissions
+  app.post("/summaries", async (req, res) => {
+    console.log("processing summaries form submission");
+
+    // Get the text to summarize from the form data
+    const text = req.body.text;
+
+    // Generate a summary of the text using the GPT API
+    const summary = await gptAPI.generateSummary(text);
+
+    // Render the summary on the page
+    res.render("summaries", { summary });
+  });
+
+  // Define a route for the Spanish translator page
+  app.get("/spanishTranslator", (req, res) => {
+    console.log("processing /spanishTranslator route");
+    res.render("spanishTranslator");
+  });
+
+  // Define a route to handle Spanish translator form submissions
+  app.post("/spanishTranslator", async (req, res) => {
+    console.log("processing Spanish translator form submission");
+
+    // Get the text to translate from the form data
+    const text = req.body.text;
+
+    // Translate the text to Spanish using the GPT API
+    const translation = await gptAPI.translateToSpanish(text);
+
+    // Render the translated text on the page
+    res.render("spanishTranslator", { translation });
+  });
 
   // Render the response on the page
   res.render("gptdemo", { response: response.choices[0].text });

@@ -113,6 +113,13 @@ app.get('/about',
   }
 )
 
+app.get('/index', 
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('index');
+  }
+)
+
 app.get('/team', 
   isLoggedIn,
   (req,res,next) => {

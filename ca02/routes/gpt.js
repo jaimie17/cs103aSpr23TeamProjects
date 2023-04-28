@@ -12,24 +12,6 @@ const gptAPI = new GPT(process.env.APIKEY);
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "pug");
 
-// Define a route for the home page
-app.get("/", (req, res) => {
-  console.log("processing / route");
-  res.render("home");
-});
-
-// Define a route for the team pages
-app.get("/index", (req, res) => {
-  console.log("processing /index route");
-  res.render("team");
-});
-
-// Define a route for the about page
-app.get("/about", (req, res) => {
-  console.log("processing /about route");
-  res.render("about");
-});
-
 // Define a route for the GPT demo page
 app.get("/gptdemo", (req, res) => {
   console.log("processing /gptdemo route");

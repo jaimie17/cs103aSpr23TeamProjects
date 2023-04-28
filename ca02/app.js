@@ -96,13 +96,34 @@ app.use(pw_auth_router)
 app.use(layouts);
 
 app.get('/', (req,res,next) => {
-  res.render('index');
+  res.render('home');
 })
+
+// app.get('/team', 
+//   isLoggedIn,
+//   (req,res,next) => {
+//     res.render('team');
+//   }
+// )
 
 app.get('/about', 
   isLoggedIn,
   (req,res,next) => {
     res.render('about');
+  }
+)
+
+app.get('/team', 
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('team');
+  }
+)
+
+app.get('/home', 
+  isLoggedIn,
+  (req,res,next) => {
+    res.render('home');
   }
 )
 

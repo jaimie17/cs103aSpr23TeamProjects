@@ -37,7 +37,3 @@ app.post("/gptdemo", async (req, res) => {
   res.render("gptdemo", { response: response.choices[0].text });
 });
 
-// Start the server
-app.listen(3000, () => {
-  console.log("Server listening on port 3000");
-});

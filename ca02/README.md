@@ -29,3 +29,9 @@ Hitting the "group by category" link sends you to a page with a simple table wit
 
 <img width="1338" alt="Screen Shot 2023-04-22 at 6 29 42 PM" src="https://user-images.githubusercontent.com/76130563/233810597-d45d377b-97de-4548-827c-4ed1e5779e92.png">
 <img width="1059" alt="Screen Shot 2023-04-22 at 6 31 33 PM" src="https://user-images.githubusercontent.com/76130563/233810604-ac122a00-85e0-4036-a555-68859b4564dc.png">
+
+## CA02: Adding new page called TextTrove: 
+We have created TextTrove page that is inside our Productivity App which focused on creating a web application using Express, Mongoose, and EJS frameworks, which utilizes prompt engineering to generate useful responses to specific user queries. 
+
+#### Motivation: 
+The theme of the project is "Text Generation and Analysis," from CA01 and the GPT class's methods will be used to generate text in various formats, such as summaries, translations, paraphrases, poems, articles, captions, etc. Additionally, the app will perform text analysis, such as sentiment analysis. The app should include authentication, so users can log in with a username and password, and store information about their API requests in the database. 

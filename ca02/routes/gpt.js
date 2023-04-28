@@ -55,4 +55,24 @@ app.post("/index/spanishTranslations", async (req, res) => {
   res.render("spanishTranslations", { translation });
 });
 
+// Define a route for the poem page
+app.get("/index/poems", (req, res) => {
+  console.log("processing /poem route");
+  res.render("poems");
+});
+
+// Define a route to handle poem form submissions
+app.post("/index/poems", async (req, res) => {
+  console.log("processing poem form submission");
+
+  // Get the prompt from the form data
+  const prompt = req.body.prompt;
+
+  // Generate a poem based on the prompt using the GPT API
+  const poem = await gptAPI.generatePoem(prompt);
+
+  // Render the poem on the page
+  res.render("poems", { poem });
+});
+
 module.exports = app;

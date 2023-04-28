@@ -75,4 +75,24 @@ app.post("/index/poems", async (req, res) => {
   res.render("poems", { poem });
 });
 
+// Define a route for the Spanish translator page
+app.get("/index/synonyms", (req, res) => {
+  console.log("processing /synonyms route");
+  res.render("synonyms");
+});
+
+// Define a route to handle Spanish translator form submissions
+app.post("/index/synonyms", async (req, res) => {
+
+  // Get the text to translate from the form data
+  const text = req.body.text;
+
+  // Translate the text to Spanish using the GPT API
+  const translation = await gptAPI.getSynonyms(text);
+
+  // Render the translated text on the page
+  res.render("synonyms", { translation });
+});
+
+
 module.exports = app;

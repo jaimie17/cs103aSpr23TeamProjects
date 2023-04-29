@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express.Router();
 const path = require('path');
+const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
 const { Configuration, OpenAIApi } = require("openai");
 const configuration = new Configuration({
   apiKey: process.env.OPENAI_API_KEY,
@@ -14,6 +15,23 @@ isLoggedIn = (req,res,next) => {
     res.redirect('/login')
   }
 }
+
+async function getResponse(text){
+  console.log("OpenAI API Key:", process.env.OPENAI_API_KEY);
+  const gptResponse = await openai.createCompletion({
+    model_engine: "text-davinci-003",
+    engine: "text-davinci-003",
+    prompt: text, 
+    maxTokens: 64,
+    n: 1,
+    temperature: 0.5,
+    frequency_penalty: 0,
+    presence_penalty: 0,
+    model: "text-davinci-003",
+  })
+  return gptResponse.data.choices[0].text;
+}
+
 
 // Define a route for the summaries page
 app.get("/index/summaries", (req, res) => {
@@ -69,10 +87,11 @@ app.post("/index/poems", async (req, res) => {
   const prompt = req.body.prompt;
 
   // Generate a poem based on the prompt using the GPT API
-  const poem = await gptAPI.generatePoem(prompt);
+  const poem = await getResponse(prompt);
 
   // Render the poem on the page
-  res.render("poems", { poem });
+  res.render("poems", { poem: poem });
+
 });
 
 // Define a route for the Spanish translator page

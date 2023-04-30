@@ -10,6 +10,9 @@
         <br>
         <input type="submit" value="Generate Poem">
     </form>
-    
+    <% if (typeof poem !== 'undefined') { %>
+        <h2>Poem:</h2>
+        <p><%= poem %></p>
+      <% } %>
 </body>
 

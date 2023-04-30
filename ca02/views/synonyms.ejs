@@ -4,11 +4,14 @@
 
 <body>
     <h1>GPT Synonym Generator</h1>
-    <form action="/gpt" method="POST">
-        <label for="text">Enter a word to find synonyms for:</label><br>
-        <textarea id="text" name="text"></textarea><br>
+    <form action="/index/synonyms" method="POST">
+        <label for="prompt">Enter a word to find synonyms for:</label><br>
+        <input type="text" id="prompt" name="prompt"><br>
         <br>
         <input type="submit" value="Generate Synonyms">
     </form>
-    
+    <% if (typeof synonyms !== 'undefined') { %>
+        <h2>Synonyms:</h2>
+        <p><%= synonyms %></p>
+    <% } %>
 </body>

@@ -16,7 +16,7 @@ isLoggedIn = (req,res,next) => {
   }
 }
 
-// Getthe response from the GPT API
+// Get the response from the GPT API
 async function getResponse(text){
   const gptResponse = await openai.createCompletion({
     prompt: text, 
@@ -67,12 +67,12 @@ router.post("/index/poems", async (req, res) => {
 
 });
 
-// Route for the Spanish translator page
+// Route for the synonyms page
 router.get("/index/synonyms", (req, res) => {
   res.render("synonyms");
 });
 
-// Route to handle Spanish translator form submissions
+// Route to handle synonym form submissions
 router.post("/index/synonyms", async (req, res) => {
   const prompt = "Generate synonyms for the word " + req.body.prompt;
   const synonyms = await getResponse(prompt);

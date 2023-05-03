@@ -35,3 +35,5 @@ We have created TextTrove page that is inside our Productivity App which focused
 
 #### Motivation: 
 The theme of the project is "Text Generation and Analysis," from CA01 and the GPT class's methods will be used to generate text in various formats, such as summaries, translations, paraphrases, poems, articles, captions, etc. Additionally, the app will perform text analysis, such as sentiment analysis. The app should include authentication, so users can log in with a username and password, and store information about their API requests in the database. 
+
+![image (2)](https://user-images.githubusercontent.com/76130563/236053917-bed89ecb-0978-4fbc-827f-30706edd2015.png)
